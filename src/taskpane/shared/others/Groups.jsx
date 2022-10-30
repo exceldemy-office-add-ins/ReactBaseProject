@@ -8,8 +8,8 @@ export default function Groups() {
         <Box>
           <Grid container spacing={2}>
             <Grid item xs={6}>
-              <Link to='/flipRanges'>
-              <Button sx={{ bgcolor: 'secondary.main', color: 'primary.contrastText' }} variant='contained'size="small" xs={{fontSize:32}} >Cell & Ranges</Button>
+              <Link to='/cell&Ranges' style={{textDecoration: 'none'}}>
+              <Button sx={{ bgcolor: 'secondary.main', color: 'primary.contrastText' }} variant='contained'size="small">Cell & Ranges</Button>
               </Link>
             </Grid>
             <Grid item xs={6}>

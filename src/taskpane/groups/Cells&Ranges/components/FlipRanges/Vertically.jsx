@@ -30,7 +30,7 @@ const Vertically = () =>{
       };
     return(
     <div>
-    { <button onClick={verticalFlip}>Vertical Flip</button>}
+    { <button onClick={verticalFlip}>Flip Ranges</button>}
    </div>
     )
 }

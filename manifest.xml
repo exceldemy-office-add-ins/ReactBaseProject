@@ -66,7 +66,7 @@
                     </Icon>
                     <Action xsi:type="ShowTaskpane">
                       <TaskpaneId>ButtonId1</TaskpaneId>
-                      <SourceLocation resid="Taskpane.Url"/>
+                      <SourceLocation resid="FlipRanges.Url"/>
                     </Action>
                     </Item>
 
@@ -83,7 +83,7 @@
                       </Icon>
                       <Action xsi:type="ShowTaskpane">
                         <TaskpaneId>ButtonId1</TaskpaneId>
-                        <SourceLocation resid="Taskpane.Url"/>
+                        <SourceLocation resid="TransposeRanges.Url"/>
                       </Action>
                     </Item>
                   </Items>
@@ -107,6 +107,8 @@
         <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812"/>
         <bt:Url id="Commands.Url" DefaultValue="https://localhost:3000/commands.html"/>
         <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3000/taskpane.html"/>
+        <bt:Url id="FlipRanges.Url" DefaultValue="https://localhost:3000/taskpane.html#/flipRanges"/>
+        <bt:Url id="TransposeRanges.Url" DefaultValue="https://localhost:3000/taskpane.html#/transposeRanges"/>
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="GetStarted.Title" DefaultValue="Get started with your sample add-in!"/>

@@ -30,7 +30,7 @@ const Horizontally = () =>{
       };
     return(
     <div>
-    { <button onClick={horizontalFlip}>Horizontal Flip</button>}
+    { <button onClick={horizontalFlip}>Flip Ranges</button>}
    </div>
     )
 }

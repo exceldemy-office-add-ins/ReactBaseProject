@@ -5,6 +5,8 @@ import { HashRouter, Link, Route, Routes } from 'react-router-dom'
 import FlipRanges from "./groups/Cells&Ranges/pages/FlipRanges";
 import Header from "./shared/header/Header";
 import Groups from "./shared/others/Groups";
+import CellAndRanges from "./groups/Cells&Ranges/pages/CellAndRanges";
+import Transpose from "./groups/Cells&Ranges/components/TransposeRanges/Transpose";
 
 
 const App = (props) => {
@@ -13,16 +15,12 @@ const App = (props) => {
   return(
     <>
       <Header/>
-
-      <nav style={{padding:'10px'}}>
-      <Link to='/groups' >Groups</Link><br/>
-      <Link to='/'>Home</Link><br/>
-      </nav>
-      
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/groups" element={<Groups/>}/>
+        <Route path="/cell&Ranges" element={<CellAndRanges/>}/>
         <Route path="/flipRanges" element={<FlipRanges/>}/>
+        <Route path="/transposeRanges" element={<Transpose/>}/>
       </Routes>
  
    
