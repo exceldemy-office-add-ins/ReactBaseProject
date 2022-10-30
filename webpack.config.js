@@ -20,21 +20,21 @@ module.exports = async (env, options) => {
     entry: {
       polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
       vendor: ["react", "react-dom", "core-js", "@fluentui/react"],
-      taskpane: ["react-hot-loader/patch", "./src/taskpane/index.js"],
+      taskpane: "./src/taskpane/index.js",
       commands: "./src/commands/commands.js",
     },
     output: {
       clean: true,
     },
     resolve: {
-      extensions: [".ts", ".tsx", ".html", ".js"],
+      extensions: [".ts", ".tsx", ".html", ".js", ".jsx"],
     },
     module: {
       rules: [
         {
           test: /\.jsx?$/,
           use: [
-            "react-hot-loader/webpack",
+        
             {
               loader: "babel-loader",
               options: {

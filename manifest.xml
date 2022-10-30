@@ -30,32 +30,69 @@
           </GetStarted>
           <FunctionFile resid="Commands.Url"/>
           <ExtensionPoint xsi:type="PrimaryCommandSurface">
-            <OfficeTab id="TabHome">
-              <Group id="CommandsGroup">
-                <Label resid="CommandsGroup.Label"/>
+            <CustomTab id="Tab1">
+ <!-- Cell and Range Group Start  -->
+              <Group id="CellAndRangeGroup">
+                <Label resid="CellAndRangeGroup.Label"/>
                 <Icon>
                   <bt:Image size="16" resid="Icon.16x16"/>
                   <bt:Image size="32" resid="Icon.32x32"/>
                   <bt:Image size="80" resid="Icon.80x80"/>
                 </Icon>
-                <Control xsi:type="Button" id="TaskpaneButton">
-                  <Label resid="TaskpaneButton.Label"/>
+               <!-- Menu Start -->
+                 <Control xsi:type="Menu" id="Menu1">
+                  <Label resid="Menu1.Dropdown.Label" />
                   <Supertip>
-                    <Title resid="TaskpaneButton.Label"/>
-                    <Description resid="TaskpaneButton.Tooltip"/>
+                    <Title resid="Menu1.Dropdown.Label" />
+                    <Description resid="Menu1.Dropdown.Tooltip" />
                   </Supertip>
-                  <Icon>
-                    <bt:Image size="16" resid="Icon.16x16"/>
-                    <bt:Image size="32" resid="Icon.32x32"/>
-                    <bt:Image size="80" resid="Icon.80x80"/>
-                  </Icon>
-                  <Action xsi:type="ShowTaskpane">
-                    <TaskpaneId>ButtonId1</TaskpaneId>
-                    <SourceLocation resid="Taskpane.Url"/>
-                  </Action>
+                <Icon>
+                  <bt:Image size="16" resid="Icon.16x16"/>
+                  <bt:Image size="32" resid="Icon.32x32"/>
+                  <bt:Image size="80" resid="Icon.80x80"/>
+                </Icon>
+                  <Items>
+                    <Item id="Menu1.Item1">
+                      <Label resid="Menu1.Item1.Label"/>
+                      <Supertip>
+                        <Title resid="Menu1.Item1.Label_2" />
+                        <Description resid="Menu1.Item1.Tooltip" />
+                       
+                      </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="Icon.16x16"/>
+                      <bt:Image size="32" resid="Icon.32x32"/>
+                      <bt:Image size="80" resid="Icon.80x80"/>
+                    </Icon>
+                    <Action xsi:type="ShowTaskpane">
+                      <TaskpaneId>ButtonId1</TaskpaneId>
+                      <SourceLocation resid="Taskpane.Url"/>
+                    </Action>
+                    </Item>
+
+                    <Item id="Menu1.Item2">
+                      <Label resid="Menu1.Item2.Label"/>
+                      <Supertip>
+                        <Title resid="Menu1.Item2.Label" />
+                        <Description resid="Menu1.Item2.Tooltip" />
+                      </Supertip>
+                      <Icon>
+                        <bt:Image size="16" resid="Icon.16x16"/>
+                        <bt:Image size="32" resid="Icon.32x32"/>
+                        <bt:Image size="80" resid="Icon.80x80"/>
+                      </Icon>
+                      <Action xsi:type="ShowTaskpane">
+                        <TaskpaneId>ButtonId1</TaskpaneId>
+                        <SourceLocation resid="Taskpane.Url"/>
+                      </Action>
+                    </Item>
+                  </Items>
                 </Control>
+                <!-- Menu1 End -->
               </Group>
-            </OfficeTab>
+  <!-- Cell and Range Group Start  -->
+               <Label resid="Tab1.TabLabel" /> 
+            </CustomTab>
           </ExtensionPoint>
         </DesktopFormFactor>
       </Host>
@@ -73,12 +110,23 @@
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="GetStarted.Title" DefaultValue="Get started with your sample add-in!"/>
-        <bt:String id="CommandsGroup.Label" DefaultValue="Commands Group"/>
+        <bt:String id="CellAndRangeGroup.Label" DefaultValue="Cell &#38; Range"/>
         <bt:String id="TaskpaneButton.Label" DefaultValue="Show Taskpane"/>
+        <bt:String id="Tab1.TabLabel" DefaultValue="Exceldemy" />
+
+        <bt:String id="Menu1.Dropdown.Label" DefaultValue="Range" />
+        <bt:String id="Menu1.Item1.Label" DefaultValue="Flip Ranges" />
+         <bt:String id="Menu1.Item1.Label_2" DefaultValue="Horizontally or Vertically" />
+        <bt:String id="Menu1.Item2.Label" DefaultValue="Transpose Ranges" />
       </bt:ShortStrings>
       <bt:LongStrings>
         <bt:String id="GetStarted.Description" DefaultValue="Your sample add-in loaded succesfully. Go to the HOME tab and click the 'Show Taskpane' button to get started."/>
         <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Click to Show a Taskpane"/>
+
+        <bt:String id="Menu1.Dropdown.Tooltip" DefaultValue="Click to Show Options on this Menu1" />
+        <bt:String id="Menu1.Item1.Tooltip"   DefaultValue="Flip or reverse the order of the selected ranges."/>
+  
+        <bt:String id="Menu1.Item2.Tooltip" DefaultValue="Taskpane in the Menu1 List." />
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>

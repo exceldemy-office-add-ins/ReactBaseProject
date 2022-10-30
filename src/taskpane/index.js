@@ -1,14 +1,16 @@
-import App from "../taskpane/components/App";
+import App from "../taskpane/App";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { HashRouter } from "react-router-dom";
 
 /* global document, Office, module, require */
 
 let isOfficeInitialized = false;
 const render = (Component) => {
   ReactDOM.render(
-      <Component isOfficeInitialized={isOfficeInitialized}/>,
-    document.getElementById("container")
+    <HashRouter>
+      <Component isOfficeInitialized={isOfficeInitialized}/> </HashRouter>,
+        document.getElementById("container")
   );
 };
 
