@@ -1,4 +1,5 @@
 import React from "react";
+import classes from './horizontally.module.css';
 
 const Horizontally = () =>{
 
@@ -30,7 +31,7 @@ const Horizontally = () =>{
       };
     return(
     <div>
-    { <button onClick={horizontalFlip}>Flip Ranges</button>}
+    { <button onClick={horizontalFlip}  className={classes.row1}>Flip Ranges</button>}
    </div>
     )
 }

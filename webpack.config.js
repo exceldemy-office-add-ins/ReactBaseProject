@@ -19,7 +19,7 @@ module.exports = async (env, options) => {
     devtool: "source-map",
     entry: {
       polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
-      vendor: ["react", "react-dom", "core-js", "@fluentui/react"],
+      vendor: ["react", "react-dom", "core-js"],
       taskpane: "./src/taskpane/index.js",
       commands: "./src/commands/commands.js",
     },
@@ -44,6 +44,12 @@ module.exports = async (env, options) => {
           ],
           exclude: /node_modules/,
         },
+
+        {
+          test: /\.css$/i,
+          use: ["style-loader", "css-loader"],
+        },
+        
         {
           test: /\.html$/,
           exclude: /node_modules/,
