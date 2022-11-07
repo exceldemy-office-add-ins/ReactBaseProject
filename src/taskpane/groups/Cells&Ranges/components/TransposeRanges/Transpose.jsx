@@ -1,14 +1,37 @@
 import React from 'react'
+import CopiedRange from './CopiedRange';
+import TargetRange from './TargetRange';
+
 
 export default function Transpose() {
-  const [copiedRange, setCopiedRange] = React.useState('');
+  const [copiedRange, setCopiedRange] = React.useState("");
+  const [targetRange, setTargetRange]= React.useState('');
   const [rowNo, setRowNo]= React.useState('');
   const [colNo, setColNo]= React.useState('');
-  const [targetRange, setTargetRange]= React.useState('');
+
   const [rowIndex, setRowIndex]= React.useState('');
   const [columnIndex, setColumnIndex]= React.useState('');
   const [sheetName, setSheetName]= React.useState('');
   const [data, setData]=React.useState('');
+
+  let eventResult;
+  const copiedRangeEvent = async () => {
+    try {
+      await Excel.run(async (context) => {
+        const worksheet = context.workbook.worksheets.getActiveWorksheet();
+        eventResult = worksheet.onSelectionChanged.add(copiedRangeEventHandler);
+        await context.sync();
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const copiedRangeEventHandler = (event1) => {
+      return setCopiedRange(event1.address);
+  };
+
+
 
   const copyRange = async () => {
     try {
@@ -26,6 +49,34 @@ export default function Transpose() {
       console.error(error);
     }
   };
+
+  async function toggleOn(){
+
+    await Excel.run(async (context) => {
+        context.runtime.load("enableEvents");
+        await context.sync();
+        console.log(context.runtime.enableEvents)
+   
+        context.runtime.enableEvents = true;
+     
+
+        await context.sync();
+    });
+}
+
+  async function toggleOff(){
+
+        await Excel.run(async (context) => {
+            context.runtime.load("enableEvents");
+            await context.sync();
+            console.log(context.runtime.enableEvents)
+       
+            context.runtime.enableEvents = false;
+         
+  
+            await context.sync();
+        });
+    }
 
   const pasteRange= async()=>{
     try{
@@ -50,7 +101,6 @@ export default function Transpose() {
     try{
       await Excel.run(async (context)=>{
         let sheet = context.workbook.worksheets.getItem(sheetName);
-
         let range = sheet.getCell(rowIndex,columnIndex);
         for(let i=1 ; i<rowNo; i++){
          for(let j=0; j<(colNo-1); j++){
@@ -60,26 +110,37 @@ export default function Transpose() {
          }
         }
         await context.sync();
-       
-
-        
       })
 
     }catch(error){
       console.log(error)
     }
   }
+  // loadEvent();
   return (
 
     <React.Fragment>
-      <p>Selected Range: {copiedRange}</p>
-      <button onClick={copyRange}>get selected range</button>
-      <p>Target Range: {targetRange}</p><br />
-      {/* {rowIndex}--{columnIndex}-- {sheetName}--{rowNo}--{colNo} <br />
-      <p>No of rows {colNo}</p> */}
+
+      <p>Source Range {copiedRange}</p>
+      <input
+        type="text"
+        value={copiedRange}
+        onChange={(e) => {
+          setCopiedRange(e.target.value);
+        }}
+        onClick={copiedRangeEvent}
+        onFocus={toggleOn}
+      />
+
+       <p>Target Range: {targetRange}</p>
+      
+      <input type="text" value={targetRange} onChange={(e)=>setTargetRange(e.target.value)} onFocus={toggleOff} onClick={copyRange}/>
+
+     <p>{rowNo}</p>
 
       <button onClick={pasteRange}>get target range</button><br />
-      <button onClick={tableToList}> Table to List</button>
+      <button onClick={tableToList}> Table to List</button><br />
     </React.Fragment>
   )
 }
+

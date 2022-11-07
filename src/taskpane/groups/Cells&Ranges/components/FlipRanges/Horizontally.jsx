@@ -1,13 +1,15 @@
+import { Button } from "@mui/material";
 import React from "react";
 import classes from './horizontally.module.css';
 
-const Horizontally = () =>{
+const Horizontally = (props) =>{
+    let rng= props.sourceRanges;
 
     const horizontalFlip = async () => {
         try {
           await Excel.run(async (context) => {
        
-            const range = context.workbook.getSelectedRange();
+            const range = context.workbook.worksheets.getActiveWorksheet().getRange(rng);
             range.load(["values","columnCount", "rowCount"]);
             await context.sync();
             const rowNo = range.rowCount;
@@ -31,7 +33,7 @@ const Horizontally = () =>{
       };
     return(
     <div>
-    { <button onClick={horizontalFlip}  className={classes.row1}>Flip Ranges</button>}
+      <Button onClick={horizontalFlip} size="small" variant="contained">Flip Horizontally</Button>
    </div>
     )
 }

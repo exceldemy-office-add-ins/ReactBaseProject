@@ -1,12 +1,13 @@
+import { Button } from "@mui/material";
 import React from "react";
 
-const Vertically = () =>{
-
+const Vertically = (props) =>{
+  let rng= props.sourceRanges;
     const verticalFlip = async () => {
         try {
           await Excel.run(async (context) => {
        
-            const range = context.workbook.getSelectedRange();
+            const range = context.workbook.worksheets.getActiveWorksheet().getRange(rng);
             range.load(["values","columnCount", "rowCount"]);
             await context.sync();
             const rowNo = range.rowCount;
@@ -30,7 +31,8 @@ const Vertically = () =>{
       };
     return(
     <div>
-    { <button onClick={verticalFlip}>Flip Ranges</button>}
+      <Button variant="contained" size="small" onClick={verticalFlip}>Flip Vertically</Button>
+    
    </div>
     )
 }
