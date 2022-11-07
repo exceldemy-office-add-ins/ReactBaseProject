@@ -23,7 +23,7 @@ export default function FlipRanges() {
           range.load('address');
           await context.sync();
           setRanges(range.address);
-          console.log(range)
+          // console.log(range)
 
       })
     
@@ -45,7 +45,7 @@ export default function FlipRanges() {
   };
 
   const copiedRangeEventHandler = (event1) => {
-    console.log(ranges);
+    // console.log(ranges);
     setRanges(event1.address);
   };
   useEffect(()=>{
