@@ -18,6 +18,12 @@ export default function CellAndRanges() {
             </Link>
             </Grid>
 
+            <Grid item xs={6}>
+            <Link to='/hideRanges' style={{textDecoration: 'none'}}>
+            <Button sx={{ bgcolor: 'secondary.main', color: 'primary.contrastText', fontSize:10 }} variant='contained'size="small">Hide Ranges</Button>
+            </Link>
+            </Grid>
+
           </Grid>
         </Box>
     </React.Fragment>
