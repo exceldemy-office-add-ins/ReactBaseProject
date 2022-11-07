@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -48,7 +48,9 @@ export default function FlipRanges() {
     console.log(ranges);
     setRanges(event1.address);
   };
-  initialValue();
+  useEffect(()=>{
+    initialValue();
+  }, [])
   return (
     <React.Fragment>
       <h4>Flip Ranges: horizontally or vertically</h4>

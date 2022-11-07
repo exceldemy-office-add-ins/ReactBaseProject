@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import CopiedRange from './CopiedRange';
 import TargetRange from './TargetRange';
 
@@ -14,6 +14,21 @@ export default function Transpose() {
   const [sheetName, setSheetName]= React.useState('');
   const [data, setData]=React.useState('');
 
+  const initialValue= async()=>{
+    try{
+      await Excel.run(async (context) => {
+        const range = context.workbook.getSelectedRange();;
+        range.load('address');
+        await context.sync();
+        setCopiedRange(range.address);
+        console.log('inside initailize function')
+
+    })
+  
+    }catch(error){
+      console.log(error)
+    }
+  }
   let eventResult;
   const copiedRangeEvent = async () => {
     try {
@@ -116,6 +131,11 @@ export default function Transpose() {
       console.log(error)
     }
   }
+  console.log('outside useEffect');
+  useEffect(()=>{
+    console.log('useeffect');
+    initialValue()
+  }, []);
   // loadEvent();
   return (
 
