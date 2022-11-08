@@ -1,7 +1,10 @@
-import { Button } from '@mui/material';
-import React from 'react'
+import React from "react";
+import { Button, Grid } from "@mui/material";
+import { Link } from "react-router-dom";
+import { Box } from "@mui/system";
 
-export default function HideAllExceptSelectedRanges() {
+export default function HideAllExceptSelectedRanges({selection}) {
+
     const hideAllExceptSelectedRanges = async () => {
         try {
           await Excel.run(async (context) => {
@@ -9,9 +12,12 @@ export default function HideAllExceptSelectedRanges() {
             const range2= sheet2.getUsedRange();
             range2.rowHidden= true;
             await context.sync();
-            const range = context.workbook.getSelectedRange();
-            range.rowHidden= false;
-            // range.load(["address", "rowIndex", "columnIndex"]);
+
+            let sepValues = selection.split(",");
+            const sheet = context.workbook.worksheets.getActiveWorksheet();
+            for (let i = 0; i < sepValues.length; i++) {
+              sheet.getRange(sepValues[i]).rowHidden = false;
+            }
             await context.sync();
             
            
@@ -21,7 +27,23 @@ export default function HideAllExceptSelectedRanges() {
         }
       };
   return (
-    <div><Button variant='contained' size='small' color='secondary'
-    onClick={hideAllExceptSelectedRanges}>Hide All Except Selected Ranges</Button></div>
+    <React.Fragment>
+    <Box>
+      <Grid container spacing={2}>
+        <Grid item sm={3}>
+          <Button variant="contained" size="small" color="success" onClick={hideAllExceptSelectedRanges}>
+            OK
+          </Button>
+        </Grid>
+        <Grid item sm={3}>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <Button variant="contained" size="small" color="error">
+              Close
+            </Button>
+          </Link>
+        </Grid>
+      </Grid>
+    </Box>
+  </React.Fragment>
   )
 }

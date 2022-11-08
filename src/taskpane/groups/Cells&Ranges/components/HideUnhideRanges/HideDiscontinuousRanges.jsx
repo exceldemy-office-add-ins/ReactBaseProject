@@ -3,14 +3,17 @@ import { Button, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Box } from "@mui/system";
 
-export default function UnhideAll() {
-  const unhideAll = async () => {
+export default function HideDiscontinuousRanges({ selection }) {
+  const hideDiscontinuousRanges = async () => {
     try {
       await Excel.run(async (context) => {
-        let sheet = context.workbook.worksheets.getActiveWorksheet();
-        let range = sheet.getUsedRange();
+        let sepValues = selection.split(",");
+        console.log(sepValues[0]);
+        const sheet = context.workbook.worksheets.getActiveWorksheet();
+        for (let i = 0; i < sepValues.length; i++) {
+          sheet.getRange(sepValues[i]).rowHidden = true;
+        }
         await context.sync();
-        range.rowHidden = false;
       });
     } catch (error) {
       console.error(error);
@@ -21,7 +24,7 @@ export default function UnhideAll() {
       <Box>
         <Grid container spacing={2}>
           <Grid item sm={3}>
-            <Button variant="contained" size="small" color="success" onClick={unhideAll}>
+            <Button variant="contained" size="small" color="success" onClick={hideDiscontinuousRanges}>
               OK
             </Button>
           </Grid>

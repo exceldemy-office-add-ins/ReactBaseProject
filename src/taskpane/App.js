@@ -7,7 +7,8 @@ import Header from "./shared/header/Header";
 import Groups from "./shared/others/Groups";
 import CellAndRanges from "./groups/Cells&Ranges/pages/CellAndRanges";
 import Transpose from "./groups/Cells&Ranges/components/TransposeRanges/Transpose";
-import HideUnhideRanges from "./groups/Cells&Ranges/components/TransposeRanges/HideUnhideRanges";
+import HideUnhideRanges from "./groups/Cells&Ranges/pages/HideUnhideRanges";
+
 
 
 const App = (props) => {

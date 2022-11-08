@@ -1,6 +1,7 @@
 import App from "../taskpane/App";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import './index.css';
 import { HashRouter } from "react-router-dom";
 
 /* global document, Office, module, require */
