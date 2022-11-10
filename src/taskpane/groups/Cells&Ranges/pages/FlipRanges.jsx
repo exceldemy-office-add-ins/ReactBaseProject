@@ -6,6 +6,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import Horizontally from "../components/FlipRanges/Horizontally";
 import Vertically from "../components/FlipRanges/Vertically";
+import { Typography } from "@mui/material";
 
 export default function FlipRanges() {
   const [ranges, setRanges] = React.useState("");
@@ -53,7 +54,7 @@ export default function FlipRanges() {
   }, [])
   return (
     <React.Fragment>
-      <h4>Flip Ranges: horizontally or vertically</h4>
+      <Typography variant="h6" fontWeight={600} sx={{}} align="center">Flip Ranges</Typography>
       <div style={{ display: "inline-block" }}>
         <span>Source Range: </span>
         <input
@@ -66,7 +67,7 @@ export default function FlipRanges() {
         />
       </div>
  
-      <p>Decide whether to Flip the selected ranges Horizontally or Vertically</p>
+      <Typography variant="subtitle2" component="div">Decide whether to Flip the selected ranges Horizontally or Vertically</Typography>
 
       {selection === "horizontally" && (
         <img src="https://milleary.sirv.com/Images/flip_horizonatally.png" width="262" height="128" alt="" />

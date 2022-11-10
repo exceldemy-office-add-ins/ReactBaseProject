@@ -1,3 +1,4 @@
+import { ViewColumn } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import React from "react";
 
@@ -31,7 +32,9 @@ const Vertically = (props) =>{
       };
     return(
     <div>
-      <Button variant="contained" size="small" onClick={verticalFlip}>Flip Vertically</Button>
+      <Button variant="contained" size="small" onClick={verticalFlip}>
+        <ViewColumn/>
+         Flip Vertically</Button>
     
    </div>
     )
