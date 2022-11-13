@@ -7,12 +7,17 @@ import FormControl from "@mui/material/FormControl";
 import Horizontally from "../components/FlipRanges/Horizontally";
 import Vertically from "../components/FlipRanges/Vertically";
 import { Input, TextField, Typography } from "@mui/material";
+import RangeInputBox from "../../../shared/reusabeComponents/RangeInputBox";
 
 export default function FlipRanges() {
   const [ranges, setRanges] = React.useState("");
   const [selection, setSelection] = React.useState("horizontally");
   const selectionChangeHandler = (e) => {
     setSelection(e.target.value);
+  };
+  const inputRangeHandler = (e) => {
+    e.preventDefault();
+    setRanges(e.target.value);
   };
 
   const initialValue = async () => {
@@ -53,29 +58,14 @@ export default function FlipRanges() {
       <Typography variant="h6" fontWeight={600} sx={{}} align="center">
         Flip Ranges
       </Typography>
-      <div style={{ marginTop: "10px", display: "flex", justifyContent: "center" }}>
-        <TextField
-          label="Selected Range"
-          focused
-          size="small"
-          margin="none"
-          color="success"
-          sx={{
-            alignSelf: "center",
-            input: { height: "1rem" },
-            div: {
-              fontSize: "15px",
-              color: "black",
-            },
-          }}
-          type="text"
-          value={ranges}
-          onChange={(e) => {
-            setRanges(e.target.value);
-          }}
-          onClick={copiedRangeEvent}
-        />
-      </div>
+
+      <RangeInputBox
+        label="Selected Range"
+        color="success"
+        value={ranges}
+        onChange={inputRangeHandler}
+        onClick={copiedRangeEvent}
+      />
 
       <Typography variant="subtitle2" component="div">
         Decide whether to Flip the selected ranges Horizontally or Vertically
@@ -88,7 +78,12 @@ export default function FlipRanges() {
         <img src="https://milleary.sirv.com/Images/flip_vertically.png" width="289" height="128" alt="" />
       )}
       <FormControl
-        sx={{ display: "flex", alignItems: "center", "& .MuiButtonBase-root": { padding: "5px", color: "black" }, "&. MuiButtonBase-root-MuiRadio-root":{color: 'black'} }}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          "& .MuiButtonBase-root": { padding: "5px", color: "black" },
+          "&. MuiButtonBase-root-MuiRadio-root": { color: "black" },
+        }}
       >
         <RadioGroup
           row

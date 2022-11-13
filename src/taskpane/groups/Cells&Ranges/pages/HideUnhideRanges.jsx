@@ -98,6 +98,7 @@ export default function HideUnhideRanges() {
             onChange={selectionChangeHandler}
             style={{ height: 32, fontSize:12 }}
           />
+          
              <FormControlLabel
             value="allExceptSelectedRanges"
             control={<Radio />}

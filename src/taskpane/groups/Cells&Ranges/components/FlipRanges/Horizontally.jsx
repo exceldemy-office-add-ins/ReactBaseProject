@@ -3,6 +3,7 @@ import React from "react";
 import { Button, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Box } from "@mui/system";
+import OkCancelButton from "../../../../shared/reusabeComponents/okCancelButton";
 
 
 const Horizontally = (props) => {
@@ -36,24 +37,7 @@ const Horizontally = (props) => {
   };
   return (
     <div>      
-
-      <Box >
-      <Grid container spacing={2} sx={{display:'flex',justifyContent:'center'}}> 
-        <Grid item sm={3}>
-          <Button variant="outlined" size="small" color="success" onClick={horizontalFlip}>
-            OK
-          </Button>
-        </Grid>
-        <Grid item sm={3}>
-          <Link to="/" style={{ textDecoration: "none" }}>
-            <Button variant="outlined" size="small" color="error">
-              Close
-            </Button>
-          </Link>
-        </Grid>
-      </Grid>
-    </Box>
-
+    <OkCancelButton onClick={horizontalFlip} />
     </div>
   );
 };
