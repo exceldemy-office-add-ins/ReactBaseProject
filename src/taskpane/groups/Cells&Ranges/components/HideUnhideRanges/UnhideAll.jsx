@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Box } from "@mui/system";
+import OkCancelButton from "../../../../shared/reusableComponents/okCancelButton";
 
 export default function UnhideAll() {
   const unhideAll = async () => {
@@ -18,22 +19,7 @@ export default function UnhideAll() {
   };
   return (
     <React.Fragment>
-      <Box>
-        <Grid container spacing={2}>
-          <Grid item sm={3}>
-            <Button variant="contained" size="small" color="success" onClick={unhideAll}>
-              OK
-            </Button>
-          </Grid>
-          <Grid item sm={3}>
-            <Link to="/" style={{ textDecoration: "none" }}>
-              <Button variant="contained" size="small" color="error">
-                Close
-              </Button>
-            </Link>
-          </Grid>
-        </Grid>
-      </Box>
+     <OkCancelButton onClick={unhideAll} />
     </React.Fragment>
   );
 }

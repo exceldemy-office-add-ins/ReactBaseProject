@@ -6,8 +6,8 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import Horizontally from "../components/FlipRanges/Horizontally";
 import Vertically from "../components/FlipRanges/Vertically";
-import { Input, TextField, Typography } from "@mui/material";
-import RangeInputBox from "../../../shared/reusabeComponents/RangeInputBox";
+import {Typography } from "@mui/material";
+import RangeInputBox from "../../../shared/reusableComponents/RangeInputBox";
 
 export default function FlipRanges() {
   const [ranges, setRanges] = React.useState("");
@@ -52,6 +52,7 @@ export default function FlipRanges() {
   };
   useEffect(() => {
     initialValue();
+    copiedRangeEvent();
   }, []);
   return (
     <React.Fragment>
@@ -64,7 +65,6 @@ export default function FlipRanges() {
         color="success"
         value={ranges}
         onChange={inputRangeHandler}
-        onClick={copiedRangeEvent}
       />
 
       <Typography variant="subtitle2" component="div">

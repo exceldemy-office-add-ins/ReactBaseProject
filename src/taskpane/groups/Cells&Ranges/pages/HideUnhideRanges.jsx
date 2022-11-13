@@ -8,7 +8,8 @@ import HideAllExceptSelectedRanges from '../components/HideUnhideRanges/HideAllE
 import HideDiscontinuousRanges from '../components/HideUnhideRanges/HideDiscontinuousRanges';
 import HideSelectedRanges from '../components/HideUnhideRanges/HideSelectedRanges'
 import UnhideAll from '../components/HideUnhideRanges/UnhideAll'
-
+import OkCancelButton from "../../../shared/reusableComponents/okCancelButton";
+import RangeInputBox from "../../../shared/reusableComponents/RangeInputBox";
 
 export default function HideUnhideRanges() {
   const [ranges, setRanges] = React.useState('');
@@ -16,6 +17,10 @@ export default function HideUnhideRanges() {
   const selectionChangeHandler = (e) => {
     setSelection(e.target.value);
   };
+  const inputChangeHandler =(e)=>{
+    e.preventDefault();
+    setRanges(e.target.value);
+  }
   const initialValue= async()=>{
     try{
       await Excel.run(async (context) => {
@@ -55,18 +60,8 @@ export default function HideUnhideRanges() {
 
   return (
     <React.Fragment>
-        <h3>Hide and Unhide Ranges</h3>
-        <div style={{ display: "inline-block" }}>
-        <span>Selected Range: </span>
-        <input
-          type="text"
-          value={ranges}
-          onChange={(e) => {
-            setRanges(e.target.value);
-          }}
-        />
-      </div>
-
+       
+    <RangeInputBox label="Selected Range" color="success" value={ranges} onChange={inputChangeHandler}  />
       <FormControl>
         <RadioGroup
           row
