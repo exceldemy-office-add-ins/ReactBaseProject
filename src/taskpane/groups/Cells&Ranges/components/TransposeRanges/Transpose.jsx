@@ -1,3 +1,4 @@
+import { TextField } from "@mui/material";
 import React, { useEffect } from "react";
 
 export default function Transpose() {
@@ -10,7 +11,7 @@ export default function Transpose() {
   const [columnIndex, setColumnIndex] = React.useState("");
   const [sheetName, setSheetName] = React.useState("");
   const [data, setData] = React.useState("");
-  const [dummy, setDummy]= React.useState(undefined);
+  const [dummy, setDummy]= React.useState(true);
 
   const initialValue = async () => {
     try {
@@ -32,18 +33,14 @@ export default function Transpose() {
       await Excel.run(async (context) => {
         const worksheet = context.workbook.worksheets.getActiveWorksheet();
         eventResult= worksheet.onSelectionChanged.add(copiedRangeEventHandler);
-        // setDummy('siddique');
         await context.sync();
         console.log('event added')
-        console.log(eventResult)
-        
-        const testRemove = ()=>{eventResult.remove};
-        
       });
     } catch (error) {
       console.log(error);
     }
   };
+
 
 
   // const copiedRangeEventHandler = (event1) => {
@@ -52,10 +49,17 @@ export default function Transpose() {
   // };
   async function copiedRangeEventHandler(event) {
     await Excel.run(async (context) => {
+      console.log(dummy);
+      if(dummy){
+        setCopiedRange(event.address);
+        
+      }else{
+        setTargetRange(event.address);
+      }
       await context.sync();
-      setCopiedRange(event.address);
+      console.log(`after sync ${dummy}`);
       console.log("Address of current selection: " + event.address);
-      console.log(eventResult);
+
     });
   }
 
@@ -104,7 +108,7 @@ export default function Transpose() {
     await Excel.run(async (context) => {
       context.runtime.load("enableEvents");
       await context.sync();
-      console.log(context.runtime.enableEvents);
+      // console.log(context.runtime.enableEvents);
 
       context.runtime.enableEvents = true;
 
@@ -172,34 +176,68 @@ export default function Transpose() {
 
   return (
     <React.Fragment>
-      <p>Source Range {copiedRange}</p>
-      <input
-        type="text"
-        value={copiedRange}
-        onChange={(e) => {
-          setCopiedRange(e.target.value);
-        }}
-        onClick={copiedRangeEvent}
-        onFocus={toggleOn}
-        
-      />
+    <div style={{ marginTop: "10px", display: "flex", justifyContent: "center" }}>
+      <TextField
+          label="Source Range"
+          focused
+          size="small"
+          margin="none"
+          color="success"
+          sx={{
+            alignSelf: "center",
+            input: { height: "1rem" },
+            div: {
+              fontSize: "15px",
+              color: "black",
+            },
+          }}
+          type="text"
+          value={copiedRange}
+          onChange={(e) => {
+            setCopiedRange(e.target.value);
+          }}
+          onClick={copiedRangeEvent}
+          onFocus={toggleOn}
+          />
+          </div>
+
 
       <p>Target Range: {targetRange}</p>
 
-      <input
-        type="text"
-        value={targetRange}
-        onChange={(e) => setTargetRange(e.target.value)}
-        onFocus={toggleOff}
       
-        onClick={copyRange}
-      />
-
+      <div style={{ marginTop: "10px", display: "flex", justifyContent: "center" }}>
+      <TextField
+          label="Target Range"
+          focused
+          size="small"
+          margin="none"
+          color="success"
+          sx={{
+            alignSelf: "center",
+            input: { height: "1rem" },
+            div: {
+              fontSize: "15px",
+              color: "black",
+            },
+          }}
+          type="text"
+          value={targetRange}
+          onChange={(e) => setTargetRange(e.target.value)}
+          onFocus={()=>{sessionStorage.setItem("clientID", "arafat")}}
+          onClick={copyRange}
+          />
+          </div>
+      
       <p>{rowNo}</p>
 
       <button onClick={pasteRange}>get target range</button>
       <br />
+      <p>{dummy && 'true'}</p>
+      <p>{!dummy && 'false'}</p>
+      <p>{targetRange}</p>
       <button onClick={()=>{tableToList()}}> Table to List</button>
+    <br />
+    <button onClick={()=>{const clientID = sessionStorage.getItem("clientID");console.log(clientID)}}>get </button>
 
     </React.Fragment>
   );

@@ -6,7 +6,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import Horizontally from "../components/FlipRanges/Horizontally";
 import Vertically from "../components/FlipRanges/Vertically";
-import { Typography } from "@mui/material";
+import { Input, TextField, Typography } from "@mui/material";
 
 export default function FlipRanges() {
   const [ranges, setRanges] = React.useState("");
@@ -15,23 +15,19 @@ export default function FlipRanges() {
     setSelection(e.target.value);
   };
 
-
-    
-    const initialValue= async()=>{
-      try{
-        await Excel.run(async (context) => {
-          const range = context.workbook.getSelectedRange();;
-          range.load('address');
-          await context.sync();
-          setRanges(range.address);
-          // console.log(range)
-
-      })
-    
-      }catch(error){
-        console.log(error)
-      }
+  const initialValue = async () => {
+    try {
+      await Excel.run(async (context) => {
+        const range = context.workbook.getSelectedRange();
+        range.load("address");
+        await context.sync();
+        setRanges(range.address);
+        // console.log(range)
+      });
+    } catch (error) {
+      console.log(error);
     }
+  };
 
   const copiedRangeEvent = async () => {
     try {
@@ -49,15 +45,29 @@ export default function FlipRanges() {
     // console.log(ranges);
     setRanges(event1.address);
   };
-  useEffect(()=>{
+  useEffect(() => {
     initialValue();
-  }, [])
+  }, []);
   return (
     <React.Fragment>
-      <Typography variant="h6" fontWeight={600} sx={{}} align="center">Flip Ranges</Typography>
-      <div style={{ display: "inline-block" }}>
-        <span>Source Range: </span>
-        <input
+      <Typography variant="h6" fontWeight={600} sx={{}} align="center">
+        Flip Ranges
+      </Typography>
+      <div style={{ marginTop: "10px", display: "flex", justifyContent: "center" }}>
+        <TextField
+          label="Selected Range"
+          focused
+          size="small"
+          margin="none"
+          color="success"
+          sx={{
+            alignSelf: "center",
+            input: { height: "1rem" },
+            div: {
+              fontSize: "15px",
+              color: "black",
+            },
+          }}
           type="text"
           value={ranges}
           onChange={(e) => {
@@ -66,8 +76,10 @@ export default function FlipRanges() {
           onClick={copiedRangeEvent}
         />
       </div>
- 
-      <Typography variant="subtitle2" component="div">Decide whether to Flip the selected ranges Horizontally or Vertically</Typography>
+
+      <Typography variant="subtitle2" component="div">
+        Decide whether to Flip the selected ranges Horizontally or Vertically
+      </Typography>
 
       {selection === "horizontally" && (
         <img src="https://milleary.sirv.com/Images/flip_horizonatally.png" width="262" height="128" alt="" />
@@ -75,7 +87,9 @@ export default function FlipRanges() {
       {selection === "vertically" && (
         <img src="https://milleary.sirv.com/Images/flip_vertically.png" width="289" height="128" alt="" />
       )}
-      <FormControl>
+      <FormControl
+        sx={{ display: "flex", alignItems: "center", "& .MuiButtonBase-root": { padding: "5px", color: "black" }, "&. MuiButtonBase-root-MuiRadio-root":{color: 'black'} }}
+      >
         <RadioGroup
           row
           aria-labelledby="demo-radio-buttons-group-label"

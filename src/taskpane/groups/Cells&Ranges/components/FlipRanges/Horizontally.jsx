@@ -1,8 +1,9 @@
-import { TableRows } from "@mui/icons-material";
-import { Button, ThemeProvider } from "@mui/material";
 import React from "react";
-import { theme } from "../../../../shared/design/theme";
-import classes from "./horizontally.module.css";
+
+import { Button, Grid } from "@mui/material";
+import { Link } from "react-router-dom";
+import { Box } from "@mui/system";
+
 
 const Horizontally = (props) => {
 
@@ -34,20 +35,25 @@ const Horizontally = (props) => {
     }
   };
   return (
-    <div>
-      <ThemeProvider theme={theme}>
+    <div>      
 
-      <Button
-        onClick={horizontalFlip}
-        size="small"
-        variant="contained"
-        color="myColor"
-        sx={{backgroundColor: 'myColor', fontSize:'smallText'}}
-        >
-        <TableRows/>
-        Flip Horizontally
-      </Button>
-        </ThemeProvider>
+      <Box >
+      <Grid container spacing={2} sx={{display:'flex',justifyContent:'center'}}> 
+        <Grid item sm={3}>
+          <Button variant="outlined" size="small" color="success" onClick={horizontalFlip}>
+            OK
+          </Button>
+        </Grid>
+        <Grid item sm={3}>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <Button variant="outlined" size="small" color="error">
+              Close
+            </Button>
+          </Link>
+        </Grid>
+      </Grid>
+    </Box>
+
     </div>
   );
 };

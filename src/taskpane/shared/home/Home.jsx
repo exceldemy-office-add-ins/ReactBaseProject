@@ -35,7 +35,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 1 }}>
+        <Box>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -87,7 +87,7 @@ export default function Home(props) {
         <AccordionSummary
           expandIcon={<ExpandMoreIcon/>}
           aria-controls="panel1a-content"
-          id="panel1a-header">
+          id="panel1a-header" >
           <Typography sx={{color:'black', fontSize:'1rem', fontWeight:'500'}}>Ranges</Typography>
         </AccordionSummary>
         <AccordionDetails sx={{padding:'2px'}}>

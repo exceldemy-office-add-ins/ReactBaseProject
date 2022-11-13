@@ -1,6 +1,8 @@
-import { ViewColumn } from "@mui/icons-material";
-import { Button } from "@mui/material";
 import React from "react";
+
+import { Button, Grid } from "@mui/material";
+import { Link } from "react-router-dom";
+import { Box } from "@mui/system";
 
 const Vertically = (props) =>{
   let rng= props.sourceRanges;
@@ -32,9 +34,22 @@ const Vertically = (props) =>{
       };
     return(
     <div>
-      <Button variant="contained" size="small" onClick={verticalFlip}>
-        <ViewColumn/>
-         Flip Vertically</Button>
+         <Box >
+      <Grid container spacing={2} sx={{display:'flex',justifyContent:'center'}}> 
+        <Grid item sm={3}>
+          <Button variant="outlined" size="small" color="success" onClick={verticalFlip}>
+            OK
+          </Button>
+        </Grid>
+        <Grid item sm={3}>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <Button variant="outlined" size="small" color="error">
+              Close
+            </Button>
+          </Link>
+        </Grid>
+      </Grid>
+    </Box>
     
    </div>
     )
