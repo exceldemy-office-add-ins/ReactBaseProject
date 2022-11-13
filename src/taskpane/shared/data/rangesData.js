@@ -1,4 +1,5 @@
 export const rangesData = [
+  
   {
     id: "1",
     title: "Flip Ranges",
@@ -16,5 +17,21 @@ export const rangesData = [
     title: "Hide/Unhide Ranges",
     description: "Hide a single column or raw, multiple adjacent and non-adjacent columns and rows ",
     link: '/hideRanges'
+  },
+];
+
+
+export const mergeUnmerge = [
+  {
+    id: "1",
+    title: "Merge Ranges",
+    description: "Select and merge cells with one click",
+    link: '/mergeRanges'
+  },
+  {
+    id: "2",
+    title: "Unmerge Ranges",
+    description: "Select and flip rows and columns horizontally or vertically.",
+    link: '/mergeRanges'
   },
 ];

@@ -9,7 +9,8 @@ import CellAndRanges from "./groups/Cells&Ranges/pages/CellAndRanges";
 import Transpose from "./groups/Cells&Ranges/components/TransposeRanges/Transpose";
 import HideUnhideRanges from "./groups/Cells&Ranges/pages/HideUnhideRanges";
 import Container from '@mui/material/Container';
-import { rangesData } from "./shared/home/data/rangesData";
+import { rangesData} from "./shared/data/rangesData";
+import MergeRanges from "./groups/Cells&Ranges/components/MergeUnmerge/MergeRanges";
 
 const App = (props) => {
   const isOfficeInitialized = props.isOfficeInitialized;
@@ -19,12 +20,15 @@ const App = (props) => {
     <Container sx={{padding:'10px'}}>
       <Header/>
       <Routes>
-        <Route path="/" element={<Home rangesData={rangesData}/>}/>
+        <Route path="/" element={<Home rangesData={rangesData} />}/>
  
-        <Route path="/cell&Ranges" element={<CellAndRanges/>}/>
+        
         <Route path="/flipRanges" element={<FlipRanges/>}/>
         <Route path="/transposeRanges" element={<Transpose/>}/>
         <Route path="/hideRanges"  element={<HideUnhideRanges/>} />
+
+
+        <Route path="/mergeRanges" element={<MergeRanges/>} />
       </Routes>
     </Container>
     </React.Fragment>

@@ -4,14 +4,16 @@ import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import classes from './home.module.css';
 import styled from "@emotion/styled";
-import { Link } from "react-router-dom";
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
 
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import CellAndRanges from "../../groups/Cells&Ranges/pages/CellAndRanges";
+
+//importing data
+import { rangesData, mergeUnmerge } from "../data/rangesData";
 
 const CustomTab = styled(Tab)`
   color: #000055;
@@ -20,8 +22,6 @@ const CustomTab = styled(Tab)`
   min-height: 30px;
   padding: 1px;
 `;
-
-
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -82,44 +82,12 @@ export default function Home(props) {
           <CustomTab label="Graph" {...a11yProps(4)} />
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0} sx={{padding: '0px'}}>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon/>}
-          aria-controls="panel1a-content"
-          id="panel1a-header" >
-          <Typography sx={{color:'black', fontSize:'1rem', fontWeight:'500'}}>Ranges</Typography>
-        </AccordionSummary>
-        <AccordionDetails sx={{padding:'2px'}}>
-        {props.rangesData.map((data) => (
-          <Link to={data.link} style={{ textDecoration: "none"}} key={data.id}>
-            <div className={classes.div}>
-              <p className={classes.title}>{data.title}</p>
-              <p className={classes.description}>{data.description}</p>
-            </div>
-          </Link>
-        ))}
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography>Merge & Unmerge</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
+      <TabPanel value={value} index={0} sx={{ padding: "0px" }}>
+        <CellAndRanges rangesData={rangesData} title="Ranges" />
+        <CellAndRanges rangesData={mergeUnmerge} title="Merge & Unmerge" />
       </TabPanel>
       <TabPanel value={value} index={1}>
-          item two
+        item two
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three
