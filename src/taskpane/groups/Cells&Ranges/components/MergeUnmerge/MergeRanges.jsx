@@ -5,6 +5,7 @@ export default function MergeRanges() {
         try {
           await Excel.run(async (context) => {
             
+            
           });
         } catch (error) {
           console.error(error);
