@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from "react";
 
+import RangeInputBox from "../../../shared/reusableComponents/RangeInputBox";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import Horizontally from "../components/FlipRanges/Horizontally";
-import Vertically from "../components/FlipRanges/Vertically";
-import { Typography } from "@mui/material";
-import RangeInputBox from "../../../shared/reusableComponents/RangeInputBox";
+import UnmergeSelectedRanges from "../components/MergeUnmerge/UnmergeSelectedRanges";
+import UnmergeAllRanges from "../components/MergeUnmerge/UnmergeAllRanges";
+import { Paper, Typography } from "@mui/material";
 import Title from "../../../shared/reusableComponents/Title";
-
-export default function FlipRanges() {
+export default function UnmergeRanges() {
   const [ranges, setRanges] = React.useState("");
-  const [selection, setSelection] = React.useState("horizontally");
+  const [selection, setSelection] = React.useState("unmergeSelection");
   const selectionChangeHandler = (e) => {
     setSelection(e.target.value);
   };
-  const inputRangeHandler = (e) => {
+  const inputChangeHandler = (e) => {
     e.preventDefault();
     setRanges(e.target.value);
   };
@@ -57,50 +56,36 @@ export default function FlipRanges() {
   }, []);
   return (
     <React.Fragment>
-      <Title title="Filp Ranges"/>
-
-      <RangeInputBox label="Selected Range" color="success" value={ranges} onChange={inputRangeHandler} />
-
-      <Typography variant="subtitle2" component="div">
-        Decide whether to Flip the selected ranges Horizontally or Vertically
-      </Typography>
-
-      {selection === "horizontally" && (
-        <img src="https://milleary.sirv.com/Images/flip_horizonatally.png" width="262" height="128" alt="" />
-      )}
-      {selection === "vertically" && (
-        <img src="https://milleary.sirv.com/Images/flip_vertically.png" width="289" height="128" alt="" />
-      )}
-      <FormControl
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          "& .MuiButtonBase-root": { padding: "5px", color: "black" },
-          "&. MuiButtonBase-root-MuiRadio-root": { color: "black" },
-        }}
-      >
+      <Title title=" Unmerge Ranges" />
+      <RangeInputBox label="Selected Range" color="success" value={ranges} onChange={inputChangeHandler} />
+      <Paper elevation={2} sx={{marginBottom: '10px', marginTop: '10px'}}>
+      <FormControl sx={{ padding: "10px", marginTop: "5px", marginBottom: "10px" }}>
         <RadioGroup
           row
           aria-labelledby="demo-radio-buttons-group-label"
-          name="radio-buttons-group"
-          defaultValue="horizontally"
-        >
+          name="radio-buttons-group2"
+          defaultValue="unmergeSelection"
+          >
           <FormControlLabel
-            value="horizontally"
+            value="unmergeSelection"
             control={<Radio />}
-            label="Horizontally"
+            label="Only the Selected Range"
             onChange={selectionChangeHandler}
-          />
+            style={{ height: 32, fontSize: 12 }}
+            />
           <FormControlLabel
-            value="vertically"
+            value="unmergeAll"
             control={<Radio />}
-            label="Vertically"
+            label="Unmege All Merged Ranges"
             onChange={selectionChangeHandler}
-          />
+            style={{ height: 32, fontSize: 12 }}
+            />
         </RadioGroup>
       </FormControl>
-      {selection === "horizontally" && <Horizontally sourceRanges={ranges} />}
-      {selection === "vertically" && <Vertically sourceRanges={ranges} />}
+      </Paper>
+
+      {selection === "unmergeSelection" && <UnmergeSelectedRanges selection={ranges} />}
+      {selection === "unmergeAll" && <UnmergeAllRanges selection={ranges} />}
     </React.Fragment>
   );
 }

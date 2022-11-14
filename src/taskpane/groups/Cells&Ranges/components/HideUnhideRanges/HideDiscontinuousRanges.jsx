@@ -7,10 +7,11 @@ export default function HideDiscontinuousRanges({ selection }) {
     try {
       await Excel.run(async (context) => {
         let sepValues = selection.split(",");
-        console.log(sepValues[0]);
+
         const sheet = context.workbook.worksheets.getActiveWorksheet();
         for (let i = 0; i < sepValues.length; i++) {
           sheet.getRange(sepValues[i]).rowHidden = true;
+ 
         }
         await context.sync();
       });

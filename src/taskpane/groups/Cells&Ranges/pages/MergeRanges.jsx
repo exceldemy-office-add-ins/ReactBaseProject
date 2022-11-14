@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from "react";
 
+import RangeInputBox from "../../../shared/reusableComponents/RangeInputBox";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import Horizontally from "../components/FlipRanges/Horizontally";
-import Vertically from "../components/FlipRanges/Vertically";
+import MergeSelectedRanges from "../components/MergeUnmerge/MergeSelectedRanges";
+import MergeAllExceptSelectedRanges from "../components/MergeUnmerge/MergeAllExceptSelectedRanges.";
 import { Typography } from "@mui/material";
-import RangeInputBox from "../../../shared/reusableComponents/RangeInputBox";
 import Title from "../../../shared/reusableComponents/Title";
-
-export default function FlipRanges() {
+export default function MergeRanges() {
   const [ranges, setRanges] = React.useState("");
-  const [selection, setSelection] = React.useState("horizontally");
+  const [selection, setSelection] = React.useState("mergeSelection");
   const selectionChangeHandler = (e) => {
     setSelection(e.target.value);
   };
-  const inputRangeHandler = (e) => {
+  const inputChangeHandler = (e) => {
     e.preventDefault();
     setRanges(e.target.value);
   };
@@ -57,50 +56,35 @@ export default function FlipRanges() {
   }, []);
   return (
     <React.Fragment>
-      <Title title="Filp Ranges"/>
-
-      <RangeInputBox label="Selected Range" color="success" value={ranges} onChange={inputRangeHandler} />
-
-      <Typography variant="subtitle2" component="div">
-        Decide whether to Flip the selected ranges Horizontally or Vertically
-      </Typography>
-
-      {selection === "horizontally" && (
-        <img src="https://milleary.sirv.com/Images/flip_horizonatally.png" width="262" height="128" alt="" />
-      )}
-      {selection === "vertically" && (
-        <img src="https://milleary.sirv.com/Images/flip_vertically.png" width="289" height="128" alt="" />
-      )}
-      <FormControl
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          "& .MuiButtonBase-root": { padding: "5px", color: "black" },
-          "&. MuiButtonBase-root-MuiRadio-root": { color: "black" },
-        }}
-      >
+     <Title title="Merge Ranges" />
+      <RangeInputBox label="Selected Range" color="success" value={ranges} onChange={inputChangeHandler} />
+      <FormControl>
         <RadioGroup
           row
           aria-labelledby="demo-radio-buttons-group-label"
-          name="radio-buttons-group"
-          defaultValue="horizontally"
+          name="radio-buttons-group2"
+          defaultValue="mergeSelection"
         >
           <FormControlLabel
-            value="horizontally"
+            value="mergeSelection"
             control={<Radio />}
-            label="Horizontally"
+            label="Only the Selected Range"
             onChange={selectionChangeHandler}
+            style={{ height: 32, fontSize: 12 }}
           />
           <FormControlLabel
-            value="vertically"
+            value="mergeAllExceptSelection"
             control={<Radio />}
-            label="Vertically"
+            label="All Except Selected Ranges"
             onChange={selectionChangeHandler}
+            style={{ height: 32, fontSize: 12 }}
           />
         </RadioGroup>
       </FormControl>
-      {selection === "horizontally" && <Horizontally sourceRanges={ranges} />}
-      {selection === "vertically" && <Vertically sourceRanges={ranges} />}
+
+      {selection === "mergeSelection" && <MergeSelectedRanges selection={ranges} />}
+      {selection === "mergeAllExceptSelection" && <MergeAllExceptSelectedRanges selection={ranges} />}
+      
     </React.Fragment>
   );
 }

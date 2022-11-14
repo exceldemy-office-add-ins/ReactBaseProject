@@ -52,6 +52,7 @@
                   <bt:Image size="80" resid="Icon.80x80"/>
                 </Icon>
                   <Items>
+
                     <Item id="Menu1.Item1">
                       <Label resid="Menu1.Item1.Label"/>
                       <Supertip>
@@ -86,11 +87,102 @@
                         <SourceLocation resid="TransposeRanges.Url"/>
                       </Action>
                     </Item>
+
+                     <Item id="Menu1.Item3">
+                      <Label resid="Menu1.Item3.Label"/>
+                      <Supertip>
+                        <Title resid="Menu1.Item3.Label_2" />
+                        <Description resid="Menu1.Item3.Tooltip" />
+                      </Supertip>
+                      <Icon>
+                        <bt:Image size="16" resid="Icon.16x16"/>
+                        <bt:Image size="32" resid="Icon.32x32"/>
+                        <bt:Image size="80" resid="Icon.80x80"/>
+                      </Icon>
+                      <Action xsi:type="ShowTaskpane">
+                        <TaskpaneId>ButtonId1</TaskpaneId>
+                        <SourceLocation resid="HideRanges.Url"/>
+                      </Action>
+                    </Item>
+
+                    <Item id="Menu1.Item4">
+                      <Label resid="Menu1.Item4.Label"/>
+                      <Supertip>
+                        <Title resid="Menu1.Item4.Label_2" />
+                        <Description resid="Menu1.Item4.Tooltip" />
+                      </Supertip>
+                      <Icon>
+                        <bt:Image size="16" resid="Icon.16x16"/>
+                        <bt:Image size="32" resid="Icon.32x32"/>
+                        <bt:Image size="80" resid="Icon.80x80"/>
+                      </Icon>
+                      <Action xsi:type="ShowTaskpane">
+                        <TaskpaneId>ButtonId1</TaskpaneId>
+                        <SourceLocation resid="UnhideRanges.Url"/>
+                      </Action>
+                    </Item>
+
                   </Items>
                 </Control>
                 <!-- Menu1 End -->
+
+
+                 <!-- Menu 2 Start -->
+                 <Control xsi:type="Menu" id="Menu2">
+                  <Label resid="Menu2.Dropdown.Label" />
+                  <Supertip>
+                    <Title resid="Menu2.Dropdown.Label" />
+                    <Description resid="Menu2.Dropdown.Tooltip" />
+                  </Supertip>
+                <Icon>
+                  <bt:Image size="16" resid="Icon.16x16"/>
+                  <bt:Image size="32" resid="Icon.32x32"/>
+                  <bt:Image size="80" resid="Icon.80x80"/>
+                </Icon>
+                  <Items>
+
+                    <Item id="Menu2.Item1">
+                      <Label resid="Menu2.Item1.Label"/>
+                      <Supertip>
+                        <Title resid="Menu2.Item1.Label_2" />
+                        <Description resid="Menu2.Item1.Tooltip" />
+                       
+                      </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="Icon.16x16"/>
+                      <bt:Image size="32" resid="Icon.32x32"/>
+                      <bt:Image size="80" resid="Icon.80x80"/>
+                    </Icon>
+                    <Action xsi:type="ShowTaskpane">
+                      <TaskpaneId>ButtonId1</TaskpaneId>
+                      <SourceLocation resid="MergeRanges.Url"/>
+                    </Action>
+                    </Item>
+
+                    <Item id="Menu2.Item2">
+                      <Label resid="Menu2.Item2.Label"/>
+                      <Supertip>
+                        <Title resid="Menu2.Item2.Label" />
+                        <Description resid="Menu2.Item2.Tooltip" />
+                      </Supertip>
+                      <Icon>
+                        <bt:Image size="16" resid="Icon.16x16"/>
+                        <bt:Image size="32" resid="Icon.32x32"/>
+                        <bt:Image size="80" resid="Icon.80x80"/>
+                      </Icon>
+                      <Action xsi:type="ShowTaskpane">
+                        <TaskpaneId>ButtonId1</TaskpaneId>
+                        <SourceLocation resid="UnmergeRanges.Url"/>
+                      </Action>
+                    </Item>
+
+                
+
+                  </Items>
+                </Control>
+                <!-- Menu2 End -->
               </Group>
-  <!-- Cell and Range Group Start  -->
+  <!-- Cell and Range Group End  -->
                <Label resid="Tab1.TabLabel" /> 
             </CustomTab>
           </ExtensionPoint>
@@ -109,6 +201,10 @@
         <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3000/taskpane.html"/>
         <bt:Url id="FlipRanges.Url" DefaultValue="https://localhost:3000/taskpane.html#/flipRanges"/>
         <bt:Url id="TransposeRanges.Url" DefaultValue="https://localhost:3000/taskpane.html#/transposeRanges"/>
+        <bt:Url id="HideRanges.Url" DefaultValue="https://localhost:3000/taskpane.html#/hideRanges"/>
+        <bt:Url id="UnhideRanges.Url" DefaultValue="https://localhost:3000/taskpane.html#/unhideRanges"/>
+        <bt:Url id="MergeRanges.Url" DefaultValue="https://localhost:3000/taskpane.html#/mergeRanges"/>
+        <bt:Url id="UnmergeRanges.Url" DefaultValue="https://localhost:3000/taskpane.html#/unmergeRanges"/>
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="GetStarted.Title" DefaultValue="Get started with your sample add-in!"/>
@@ -118,17 +214,37 @@
 
         <bt:String id="Menu1.Dropdown.Label" DefaultValue="Range" />
         <bt:String id="Menu1.Item1.Label" DefaultValue="Flip Ranges" />
-         <bt:String id="Menu1.Item1.Label_2" DefaultValue="Horizontally or Vertically" />
+        <bt:String id="Menu1.Item1.Label_2" DefaultValue="Horizontally or Vertically" />
         <bt:String id="Menu1.Item2.Label" DefaultValue="Transpose Ranges" />
+        <bt:String id="Menu1.Item2.Label_2" DefaultValue="Selected or Except Selected" />
+        <bt:String id="Menu1.Item3.Label" DefaultValue="Hide Ranges" />
+        <bt:String id="Menu1.Item3.Label_2" DefaultValue="Selected or Except Selected" />
+        <bt:String id="Menu1.Item4.Label" DefaultValue="Unhide Ranges" />
+        <bt:String id="Menu1.Item4.Label_2" DefaultValue="Selected or All" />
+
+
+        <bt:String id="Menu2.Dropdown.Label" DefaultValue="Merge &#38; Unmerge " />
+        <bt:String id="Menu2.Item1.Label" DefaultValue="Merge Ranges" />
+        <bt:String id="Menu2.Item1.Label_2" DefaultValue="Selected or Except Selected" />
+        <bt:String id="Menu2.Item2.Label" DefaultValue="Unmerge Ranges" />
+        <bt:String id="Menu2.Item2.Label_2" DefaultValue="Selected or All" />
+
       </bt:ShortStrings>
       <bt:LongStrings>
         <bt:String id="GetStarted.Description" DefaultValue="Your sample add-in loaded succesfully. Go to the HOME tab and click the 'Show Taskpane' button to get started."/>
         <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Click to Show a Taskpane"/>
 
-        <bt:String id="Menu1.Dropdown.Tooltip" DefaultValue="Click to Show Options on this Menu1" />
+        <bt:String id="Menu1.Dropdown.Tooltip" DefaultValue="Click to Show Range options." />
         <bt:String id="Menu1.Item1.Tooltip"   DefaultValue="Flip or reverse the order of the selected ranges."/>
-  
-        <bt:String id="Menu1.Item2.Tooltip" DefaultValue="Taskpane in the Menu1 List." />
+        <bt:String id="Menu1.Item2.Tooltip" DefaultValue="Traspose ranges" />
+        <bt:String id="Menu1.Item3.Tooltip" DefaultValue="Hide a single column or raw, multiple adjacent and non-adjacent columns and rows." />
+        <bt:String id="Menu1.Item4.Tooltip" DefaultValue="Unhide hidden ranges from selection or all." />
+
+
+        <bt:String id="Menu2.Dropdown.Tooltip" DefaultValue="Click to Show Merge &#38; Unmerge options." />
+        <bt:String id="Menu2.Item1.Tooltip"   DefaultValue="Select and merge cells with one click."/>
+        <bt:String id="Menu2.Item2.Tooltip" DefaultValue="Unmerge ranges" />
+       
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>

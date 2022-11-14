@@ -7,14 +7,15 @@ import FormControl from "@mui/material/FormControl";
 import HideAllExceptSelectedRanges from '../components/HideUnhideRanges/HideAllExceptSelectedRanges'
 import HideDiscontinuousRanges from '../components/HideUnhideRanges/HideDiscontinuousRanges';
 import HideSelectedRanges from '../components/HideUnhideRanges/HideSelectedRanges'
-
+import UnhideAll from '../components/HideUnhideRanges/UnhideAll'
 import RangeInputBox from "../../../shared/reusableComponents/RangeInputBox";
 import { Typography } from "@mui/material";
+import UnhideSelectedRanges from "../components/HideUnhideRanges/UnhideSelectedRanges";
 import Title from "../../../shared/reusableComponents/Title";
 
 export default function HideUnhideRanges() {
   const [ranges, setRanges] = React.useState('');
-  const [selection, setSelection] = React.useState("ContinuousSelection");
+  const [selection, setSelection] = React.useState("unhideSelectedRanges");
   const selectionChangeHandler = (e) => {
     setSelection(e.target.value);
   };
@@ -61,48 +62,37 @@ export default function HideUnhideRanges() {
 
   return (
     <React.Fragment>
-      <Title title="Hide Ranges"/>
+   <Title title="Unhide Ranges"/>
     <RangeInputBox label="Selected Range" color="success" value={ranges} onChange={inputChangeHandler}  />
       <FormControl>
         <RadioGroup
           row
           aria-labelledby="demo-radio-buttons-group-label"
           name="radio-buttons-group"
-          defaultValue="singleSelection"
+          defaultValue="unhideSelectedRanges"
         
         >
           
-      
           <FormControlLabel
-            value="ContinuousSelection"
+            value="unhideSelectedRanges"
             control={<Radio />}
-            label="Single/Multiple Adjacent Range"
+            label="Unhide from Selection" 
+            onChange={selectionChangeHandler}
+            style={{ height: 32, fontSize:12 }}
+            
+          />
+          <FormControlLabel
+            value="unhideAll"
+            control={<Radio />}
+            label="Unhide All"
             onChange={selectionChangeHandler}
             style={{ height: 32, fontSize:12 }}
           />
-            <FormControlLabel
-            value="multipleDiscontinuousSelection"
-            control={<Radio />}
-            label="Multiple Non-Adjacent Range"
-            onChange={selectionChangeHandler}
-            style={{ height: 32, fontSize:12 }}
-          />
-          
-             <FormControlLabel
-            value="allExceptSelectedRanges"
-            control={<Radio />}
-            label="Hide All Except Selected Range"
-            onChange={selectionChangeHandler}
-            style={{ height: 32, fontSize:12 }}
-          />
+ 
         </RadioGroup>
       </FormControl>
-
-
- 
-        {selection === 'ContinuousSelection' && <HideSelectedRanges selection={ranges} />}
-        {selection === 'multipleDiscontinuousSelection' && <HideDiscontinuousRanges selection={ranges} />}
-        {selection === 'allExceptSelectedRanges' && <HideAllExceptSelectedRanges selection={ranges} />}
+        {selection === 'unhideSelectedRanges' && <UnhideSelectedRanges selection={ranges} />}
+        {selection === 'unhideAll' && <UnhideAll selection={ranges} />}
     </React.Fragment>
   )
 }
