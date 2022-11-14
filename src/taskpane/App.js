@@ -4,8 +4,6 @@ import Home from "./shared/home/Home";
 import { HashRouter, Link, Route, Routes } from 'react-router-dom'
 import FlipRanges from "./groups/Cells&Ranges/pages/FlipRanges";
 import Header from "./shared/header/Header";
-
-import CellAndRanges from "./groups/Cells&Ranges/pages/CellAndRanges";
 import Transpose from "./groups/Cells&Ranges/components/TransposeRanges/Transpose";
 import HideUnhideRanges from "./groups/Cells&Ranges/pages/HideUnhideRanges";
 import Container from '@mui/material/Container';

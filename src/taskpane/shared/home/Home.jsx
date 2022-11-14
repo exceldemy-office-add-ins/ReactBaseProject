@@ -5,15 +5,10 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import styled from "@emotion/styled";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import CellAndRanges from "../../groups/Cells&Ranges/pages/CellAndRanges";
 
 //importing data
 import { rangesData, mergeUnmerge } from "../data/rangesData";
+import AccordionList from "../reusableComponents/AccordionList";
 
 const CustomTab = styled(Tab)`
   color: #000055;
@@ -83,8 +78,8 @@ export default function Home(props) {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0} sx={{ padding: "0px" }}>
-        <CellAndRanges rangesData={rangesData} title="Ranges" />
-        <CellAndRanges rangesData={mergeUnmerge} title="Merge & Unmerge" />
+        <AccordionList rangesData={rangesData} title="Ranges" />
+        <AccordionList rangesData={mergeUnmerge} title="Merge & Unmerge" />
       </TabPanel>
       <TabPanel value={value} index={1}>
         item two
