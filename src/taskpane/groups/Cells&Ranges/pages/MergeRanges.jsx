@@ -9,6 +9,13 @@ import MergeSelectedRanges from "../components/MergeUnmerge/MergeSelectedRanges"
 import MergeAllExceptSelectedRanges from "../components/MergeUnmerge/MergeAllExceptSelectedRanges.";
 import { Typography } from "@mui/material";
 import Title from "../../../shared/reusableComponents/Title";
+import RadioButton from "../../../shared/reusableComponents/RadioButton";
+
+const radioInfo= [
+  {id: '1', value: 'mergeSelection', label: 'Only the Selected Range'},
+  {id: '2', value: 'mergeAllExceptSelection', label: 'All Except Selected Ranges'}, 
+]
+
 export default function MergeRanges() {
   const [ranges, setRanges] = React.useState("");
   const [selection, setSelection] = React.useState("mergeSelection");
@@ -58,30 +65,9 @@ export default function MergeRanges() {
     <React.Fragment>
      <Title title="Merge Ranges" />
       <RangeInputBox label="Selected Range" color="success" value={ranges} onChange={inputChangeHandler} />
-      <FormControl>
-        <RadioGroup
-          row
-          aria-labelledby="demo-radio-buttons-group-label"
-          name="radio-buttons-group2"
-          defaultValue="mergeSelection"
-        >
-          <FormControlLabel
-            value="mergeSelection"
-            control={<Radio />}
-            label="Only the Selected Range"
-            onChange={selectionChangeHandler}
-            style={{ height: 32, fontSize: 12 }}
-          />
-          <FormControlLabel
-            value="mergeAllExceptSelection"
-            control={<Radio />}
-            label="All Except Selected Ranges"
-            onChange={selectionChangeHandler}
-            style={{ height: 32, fontSize: 12 }}
-          />
-        </RadioGroup>
-      </FormControl>
 
+      <RadioButton defaultValue="mergeSelection" formData={radioInfo} onChange={selectionChangeHandler} />
+      
       {selection === "mergeSelection" && <MergeSelectedRanges selection={ranges} />}
       {selection === "mergeAllExceptSelection" && <MergeAllExceptSelectedRanges selection={ranges} />}
       
