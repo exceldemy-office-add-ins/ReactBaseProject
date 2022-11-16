@@ -7,7 +7,7 @@ import { Paper } from "@mui/material";
 export default function RadioButton(props) {
   return (
     <React.Fragment>
-      <Paper elevation={3} sx={{ marginBottom: "10px", marginTop: "10px" }}>
+      <Paper elevation={3} sx={{ marginBottom: "10px", marginTop: "10px", padding:'10px'}}>
         <FormControl  sx={{
           display: "flex",
           alignItems: "center",

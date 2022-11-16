@@ -6,8 +6,8 @@ import { Box } from "@mui/system";
 
 export default function OkCancelButton(props) {
   return (
-    <div>
-      <Box>
+    <div style={{marginTop: '20px'}}>
+      <Box >
         <Grid container spacing={2} sx={{ display: "flex", justifyContent: "center" }}>
           <Grid item sm={3}>
             <Button variant="outlined" size="small" color="success" onClick={props.onClick}>
