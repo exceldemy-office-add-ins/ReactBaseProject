@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function RangeInputBox(props) {
   return (
- 
+    <div style={{ marginTop: "10px", display: "flex", justifyContent: "center" }}>
     <TextField
       label={props.label}
       focused
@@ -26,6 +26,6 @@ export default function RangeInputBox(props) {
       onFocus= {props.onFocus}
       onBlur= {props.onBlur}
     />
-
+  </div>
   )
 }

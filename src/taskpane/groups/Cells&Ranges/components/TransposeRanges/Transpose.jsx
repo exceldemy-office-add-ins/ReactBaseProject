@@ -22,7 +22,8 @@ export default function Transpose() {
   const [columnIndex, setColumnIndex] = React.useState("");
   const [sheetName, setSheetName] = React.useState("");
   const [data, setData] = React.useState("");
-  const [sourceValues, setSourceValues] = React.useState('');
+  const [sourceValues, setSourceValues] = React.useState("");
+  const [focus, setFocus] = React.useState("source");
 
   const initialValue = async () => {
     try {
@@ -75,25 +76,18 @@ export default function Transpose() {
     });
   }
 
-  // async function remove() {
-  //   await Excel.run(eventResult.context, async (context) => {
-  //     await context.sync();
-  //     console.log("Event handler successfully removed.");
-  //   });
-  // }
-
-  const copyRange = async () => {
+  const getSourceRangeData = async () => {
     try {
       await Excel.run(async (context) => {
         const range = context.workbook.worksheets.getActiveWorksheet().getRange(copiedRange);
         range.load(["address", "rowCount", "columnCount", "values"]);
         await context.sync();
-        console.log('stage 1')
-        console.log(range.rowCount)
+        console.log("stage 1");
+        console.log(range.rowCount);
         setSourceValues(range.values);
         setRowNo(range.rowCount);
         setColNo(range.columnCount);
-        console.log('getPassed copy range')
+        console.log("getPassed copy range");
         console.log(rowNo);
       });
     } catch (error) {
@@ -101,32 +95,9 @@ export default function Transpose() {
     }
   };
 
-  // async function toggleOn() {
-  //   await Excel.run(async (context) => {
-  //     context.runtime.load("enableEvents");
-  //     await context.sync();
-  //     context.runtime.enableEvents = true;
-  //     await context.sync();
-  //   });
-  // }
-
-  // async function toggleOff() {
-  //   await Excel.run(async (context) => {
-  //     context.runtime.load("enableEvents");
-  //     await context.sync();
-  //     console.log(context.runtime.enableEvents);
-  //     console.log('toggle off');
-  //     context.runtime.enableEvents = false;
-  //     remove();
-
-  //     await context.sync();
-  //   });
-  // }
-
-  const pasteRange = async () => {
+  const getTargetRangeData = async () => {
     try {
       await Excel.run(async (context) => {
-
         const range = context.workbook.worksheets.getActiveWorksheet().getRange(targetRange);
         range.load(["address", "rowIndex", "columnIndex"]);
         let sheet = context.workbook.worksheets.getActiveWorksheet();
@@ -135,7 +106,7 @@ export default function Transpose() {
         setRowIndex(range.rowIndex);
         setColumnIndex(range.columnIndex);
         setSheetName(sheet.name);
-        console.log('getPassed paste range')
+        console.log("getPassed paste range");
         console.log(rowIndex);
       });
     } catch (error) {
@@ -146,7 +117,6 @@ export default function Transpose() {
   const tableToList = async () => {
     try {
       await Excel.run(async (context) => {
-     
         let sheet = context.workbook.worksheets.getItem(sheetName);
         for (let i = 1; i < rowNo; i++) {
           for (let j = 0; j < colNo - 1; j++) {
@@ -166,54 +136,60 @@ export default function Transpose() {
     initialValue();
     dataRangeEvent();
   }, []);
-  useEffect(()=>{
-    copyRange();
-  },[copiedRange])
+  useEffect(() => {
+    getSourceRangeData();
+  }, [copiedRange]);
 
-  useEffect(()=>{
-    pasteRange();
-  },[targetRange])
+  useEffect(() => {
+    getTargetRangeData();
+  }, [targetRange]);
+
+  useEffect(() => {
+    if (focus === "source") {
+      setCopiedRange(data);
+    } else {
+      setTargetRange(data);
+    }
+  }, [data]);
 
   const setDataCopiedRange = () => {
-    setCopiedRange(data);
-
-
-  };
-  const setDataTargetRange = () => {
-    setTargetRange(data);
- 
-
+    if (focus === "source") {
+      setCopiedRange(data);
+    } else {
+      setTargetRange(data);
+    }
   };
 
-
+  const sourceFocusChangeHandler = () => {
+    setFocus("source");
+  };
+  const targetFocusChangeHandler = () => {
+    setFocus("target");
+  };
 
   return (
     <React.Fragment>
-      <Title title="Transpose Ranges"/>
-      <p>Your Selection: {data}</p>
+      <Title title="Transpose Ranges" />
 
-      <div style={{ marginTop: "10px", display: "flex", justifyContent: "center" }}>
-        <RangeInputBox label="Source Range" value={copiedRange} color="success" onChange={sourceRangeHandler} />
-        <Button size="small" onClick={setDataCopiedRange}>
-          <Tooltip title="Click to set the Selected Range as the Source Range" placement="bottom-start">
-            <SystemUpdateAlt color="success" />
-          </Tooltip>
-        </Button>
-      </div>
+      <RangeInputBox
+        label="Source Range"
+        value={copiedRange}
+        color="success"
+        onChange={sourceRangeHandler}
+        onClick={sourceFocusChangeHandler}
+      />
+
       <RadioButton defaultValue="tableToList" formData={radioInfo} onChange={selectionChangeHandler} />
 
-      <div style={{ marginTop: "10px", display: "flex", justifyContent: "center" }}>
-        <RangeInputBox label="Target Range" value={targetRange} color="error" onChange={targetRangeHandler} />
-        <Button onClick={setDataTargetRange}>
-          <Tooltip title="Click to set the Selected Range as the Target Range" placement="bottom-start">
-            <SystemUpdateAlt color="error"/>
-          </Tooltip>
-        </Button>
-      </div>
+      <RangeInputBox
+        label="Target Range"
+        value={targetRange}
+        color="error"
+        onChange={targetRangeHandler}
+        onClick={targetFocusChangeHandler}
+      />
 
-      <OkCancelButton onClick={tableToList}/>
-
-
+      <OkCancelButton onClick={tableToList} />
     </React.Fragment>
   );
 }
