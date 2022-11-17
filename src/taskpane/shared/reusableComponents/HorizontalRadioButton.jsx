@@ -8,33 +8,36 @@ import { Paper } from "@mui/material";
 export default function HorizontalRadioButton(props) {
   return (
     <React.Fragment>
-    <Paper elevation={3} sx={{ marginBottom: "10px", marginTop: "10px" }}>
-      <FormControl  sx={{
+    <Paper elevation={1} sx={{ marginBottom: "10px", marginTop: "10px", padding:'5px'}}>
+      <span style={{fontSize: '.9rem', fontWeight: '500'}}>{props.title}</span>
+        <FormControl  sx={{
+          paddingLeft:'10px',
           display: "flex",
-          alignItems: "center",
           "& .MuiButtonBase-root": { padding: "5px", color: "black" },
-          "&. MuiButtonBase-root-MuiRadio-root": { color: "black" },
+          "& .MuiButtonBase-root-MuiRadio-root": { color: "black" },
+          "& .MuiFormControl-root":{alignItems: 'start'}
         }}>
-        <RadioGroup
-          row
-          aria-labelledby="demo-radio-buttons-group-label"
-          name="radio-buttons-group2"
-          defaultValue={props.defaultValue}
-        >
-          {props.formData.map(data=>(
+          <RadioGroup
+            row
+            aria-labelledby="demo-radio-buttons-group-label"
+            name="radio-buttons-group2"
+            defaultValue={props.defaultValue}
+          >
+            {props.formData.map(data=>(
 
-          <FormControlLabel key={data.id}
-            value={data.value}
-            control={<Radio />}
-            label={data.label}
-            onChange={props.onChange}
-            style={{ height: 32, fontSize: 12 }}
-          />
-          ))}
+            <FormControlLabel key={data.id}
+              value={data.value}
+              control={<Radio />}
+              label={data.label}
+              onChange={props.onChange}
+              style={{ height: 32 }}
+              sx={{'& .MuiTypography-root': {fontSize: ".8rem", fontWeight: '500'}}}
+            />
+            ))}
 
-        </RadioGroup>
-      </FormControl>
-    </Paper>
+          </RadioGroup>
+        </FormControl>
+      </Paper>
   </React.Fragment>
   )
 }

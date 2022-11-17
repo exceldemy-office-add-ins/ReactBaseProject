@@ -7,10 +7,10 @@ import RangeInputBox from "../../../shared/reusableComponents/RangeInputBox";
 import Title from "../../../shared/reusableComponents/Title";
 import HorizontalRadioButton from "../../../shared/reusableComponents/HorizontalRadioButton";
 
-const radioInfo= [
-  {id: '1', value: 'horizontally', label: 'Horizontally'},
-  {id: '2', value: 'vertically', label: 'Vertically'}, 
-]
+const radioInfo = [
+  { id: "1", value: "horizontally", label: "Horizontally" },
+  { id: "2", value: "vertically", label: "Vertically" },
+];
 
 export default function FlipRanges() {
   const [ranges, setRanges] = React.useState("");
@@ -59,7 +59,7 @@ export default function FlipRanges() {
   }, []);
   return (
     <React.Fragment>
-      <Title title="Filp Ranges"/>
+      <Title title="Filp Ranges" />
 
       <RangeInputBox label="Selected Range" color="success" value={ranges} onChange={inputRangeHandler} />
 
@@ -67,14 +67,16 @@ export default function FlipRanges() {
         Decide whether to Flip the selected ranges Horizontally or Vertically
       </Typography>
 
-      {selection === "horizontally" && (
-        <img src="https://milleary.sirv.com/Images/flip_horizonatally.png" width="262" height="128" alt="" />
+      <div className="centered">
+        {selection === "horizontally" && (
+          <img src="https://milleary.sirv.com/Images/flip_horizonatally.png" width="262" height="128" alt="" />
         )}
-      {selection === "vertically" && (
-        <img src="https://milleary.sirv.com/Images/flip_vertically.png" width="289" height="128" alt="" />
+        {selection === "vertically" && (
+          <img src="https://milleary.sirv.com/Images/flip_vertically.png" width="289" height="128" alt="" />
         )}
+      </div>
 
-        <HorizontalRadioButton defaultValue='horizontally' formData={radioInfo} onChange={selectionChangeHandler} />
+      <HorizontalRadioButton title="Selection Type" defaultValue="horizontally" formData={radioInfo} onChange={selectionChangeHandler} />
 
       {selection === "horizontally" && <Horizontally sourceRanges={ranges} />}
       {selection === "vertically" && <Vertically sourceRanges={ranges} />}

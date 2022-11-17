@@ -17,7 +17,8 @@ export default function RangeInputBox(props) {
           fontSize: "15px",
           color: "black",
         },
-        marginBottom: '10px'
+        marginBottom: '5px',
+        marginTop: '5px',
       }}
       type="text"
       value={props.value}

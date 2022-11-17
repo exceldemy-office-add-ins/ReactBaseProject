@@ -12,6 +12,7 @@ import { rangesData} from "./shared/data/rangesData";
 import MergeRanges from "./groups/Cells&Ranges/pages/MergeRanges";
 import UnmergeRanges from "./groups/Cells&Ranges/pages/UnmergeRanges";
 import UnhideRanges from "./groups/Cells&Ranges/pages/UnhideRanges"
+import SplitRanges from "./groups/Cells&Ranges/components/SplitRanges/SplitRanges";
 
 const App = (props) => {
   const isOfficeInitialized = props.isOfficeInitialized;
@@ -32,6 +33,8 @@ const App = (props) => {
 
         <Route path="/mergeRanges" element={<MergeRanges/>} />
         <Route path="/unmergeRanges" element={<UnmergeRanges/>} />
+
+        <Route path="/splitRanges" element={<SplitRanges/>} />
       </Routes>
     </Container>
     </React.Fragment>

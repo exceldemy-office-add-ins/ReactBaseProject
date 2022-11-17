@@ -4,15 +4,23 @@ import RadioButton from "../../../../shared/reusableComponents/RadioButton";
 import RangeInputBox from "../../../../shared/reusableComponents/RangeInputBox";
 import Title from "../../../../shared/reusableComponents/Title";
 
-const radioInfo = [
-  { id: "1", value: "tableToList", label: "Table To List" },
-  { id: "2", value: "listToTable", label: "List to Table" },
+
+const radioInfo1 = [
+  { id: "1", value: "rows", label: "Split to Rows" },
+  { id: "2", value: "columns", label: "Split to Columns" },
 ];
 
-export default function Transpose() {
-  const [copiedRange, setCopiedRange] = React.useState("");
+const radioInfo2 = [
+  { id: "1", value: " ", label: "Space" },
+  { id: "2", value: ",", label: "Comma" },
+  { id: "3", value: ";", label: "Semicolon" },
+];
+
+export default function SplitRanges() {
+  const [copiedRange, setCopiedRange] = React.useState(" ");
   const [targetRange, setTargetRange] = React.useState("");
-  const [selection, setSelection] = React.useState("tableToList");
+  const [selection, setSelection] = React.useState("rows");
+  const [splitType, setSplitType] = React.useState("");
   const [rowNo, setRowNo] = React.useState("");
   const [colNo, setColNo] = React.useState("");
   const [rowIndex, setRowIndex] = React.useState("");
@@ -45,9 +53,14 @@ export default function Transpose() {
     setTargetRange(e.target.value);
   };
 
+  const splitTypeChangeHandler = (e) => {
+    setSplitType(e.target.value);
+  };
+
   const selectionChangeHandler = (e) => {
     setSelection(e.target.value);
   };
+
   var eventResult;
 
   const dataRangeEvent = async () => {
@@ -98,15 +111,29 @@ export default function Transpose() {
     }
   };
 
-  const tableToList = async () => {
+  const splitRangesRows = async () => {
     try {
       await Excel.run(async (context) => {
         let sheet = context.workbook.worksheets.getActiveWorksheet();
-        for (let i = 1; i < rowNo; i++) {
-          for (let j = 0; j < colNo - 1; j++) {
-            sheet.getCell(rowIndex + (colNo - 1) * (i - 1) + j, columnIndex + 0).values = sourceValues[i][0];
-            sheet.getCell(rowIndex + (colNo - 1) * (i - 1) + j, columnIndex + 1).values = sourceValues[0][j + 1];
-            sheet.getCell(rowIndex + (colNo - 1) * (i - 1) + j, columnIndex + 2).values = sourceValues[i][j + 1];
+        for (let i = 0; i < rowNo; i++) {
+          for (let j = 0; j < sourceValues[i][0].split(",").length; j++) {
+            sheet.getCell(rowIndex + i, columnIndex + j).values = sourceValues[i][0].split(`${splitType}`)[j];
+          }
+        }
+        await context.sync();
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const splitRangesColumns = async () => {
+    try {
+      await Excel.run(async (context) => {
+        let sheet = context.workbook.worksheets.getActiveWorksheet();
+        for (let i = 0; i < rowNo; i++) {
+          for (let j = 0; j < sourceValues[i][0].split(",").length; j++) {
+            sheet.getCell(rowIndex + j, columnIndex + i).values = sourceValues[i][0].split(`${splitType}`)[j];
           }
         }
         await context.sync();
@@ -144,28 +171,35 @@ export default function Transpose() {
   };
 
   return (
-    <React.Fragment>
-      <Title title="Transpose Dimensions" articleLink= "https://www.exceldemy.com/excel-transpose-rows-to-columns-based-on-criteria/" />
+    <div>
+      <React.Fragment>
+        <Title
+          title="Split Ranges"
+          articleLink="https://www.exceldemy.com/excel-transpose-rows-to-columns-based-on-criteria/"
+        />
 
-      <RangeInputBox
-        label="Source Range"
-        value={copiedRange}
-        color="success"
-        onChange={sourceRangeHandler}
-        onClick={sourceFocusChangeHandler}
-      />
+        <RangeInputBox
+          label="Input Range"
+          value={copiedRange}
+          color="success"
+          onChange={sourceRangeHandler}
+          onClick={sourceFocusChangeHandler}
+        />
+        <RadioButton title="Category" defaultValue="rows" formData={radioInfo1} onChange={selectionChangeHandler} />
+        <RadioButton title="Split Type" defaultValue=" " formData={radioInfo2} onChange={splitTypeChangeHandler} />
+      
 
-      <RadioButton title="Transpose Type" defaultValue="tableToList" formData={radioInfo} onChange={selectionChangeHandler} />
+        <RangeInputBox
+          label="Target Range"
+          value={targetRange}
+          color="error"
+          onChange={targetRangeHandler}
+          onClick={targetFocusChangeHandler}
+        />
 
-      <RangeInputBox
-        label="Destination Range"
-        value={targetRange}
-        color="error"
-        onChange={targetRangeHandler}
-        onClick={targetFocusChangeHandler}
-      />
-
-      <OkCancelButton onClick={tableToList} />
-    </React.Fragment>
+        {selection === 'rows' && <OkCancelButton onClick={splitRangesRows} />}
+        {selection === 'columns' && <OkCancelButton onClick={splitRangesColumns} />}
+      </React.Fragment>
+    </div>
   );
 }

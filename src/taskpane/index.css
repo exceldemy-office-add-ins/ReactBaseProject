@@ -4,3 +4,10 @@
     margin:0px;
     padding:0px;
 }
+
+.centered{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

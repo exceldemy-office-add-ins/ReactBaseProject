@@ -176,6 +176,23 @@
                       </Action>
                     </Item>
 
+                     <Item id="Menu2.Item3">
+                      <Label resid="Menu2.Item3.Label"/>
+                      <Supertip>
+                        <Title resid="Menu2.Item3.Label" />
+                        <Description resid="Menu2.Item3.Tooltip" />
+                      </Supertip>
+                      <Icon>
+                        <bt:Image size="16" resid="Icon.16x16"/>
+                        <bt:Image size="32" resid="Icon.32x32"/>
+                        <bt:Image size="80" resid="Icon.80x80"/>
+                      </Icon>
+                      <Action xsi:type="ShowTaskpane">
+                        <TaskpaneId>ButtonId1</TaskpaneId>
+                        <SourceLocation resid="SplitRanges.Url"/>
+                      </Action>
+                    </Item>
+
                 
 
                   </Items>
@@ -205,6 +222,7 @@
         <bt:Url id="UnhideRanges.Url" DefaultValue="https://localhost:3000/taskpane.html#/unhideRanges"/>
         <bt:Url id="MergeRanges.Url" DefaultValue="https://localhost:3000/taskpane.html#/mergeRanges"/>
         <bt:Url id="UnmergeRanges.Url" DefaultValue="https://localhost:3000/taskpane.html#/unmergeRanges"/>
+         <bt:Url id="SplitRanges.Url" DefaultValue="https://localhost:3000/taskpane.html#/splitRanges"/>
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="GetStarted.Title" DefaultValue="Get started with your sample add-in!"/>
@@ -228,6 +246,8 @@
         <bt:String id="Menu2.Item1.Label_2" DefaultValue="Selected or Except Selected" />
         <bt:String id="Menu2.Item2.Label" DefaultValue="Unmerge Ranges" />
         <bt:String id="Menu2.Item2.Label_2" DefaultValue="Selected or All" />
+         <bt:String id="Menu2.Item3.Label" DefaultValue="Split Ranges" />
+        <bt:String id="Menu2.Item3.Label_2" DefaultValue="Selected or All" />
 
       </bt:ShortStrings>
       <bt:LongStrings>
@@ -244,6 +264,7 @@
         <bt:String id="Menu2.Dropdown.Tooltip" DefaultValue="Click to Show Merge &#38; Unmerge options." />
         <bt:String id="Menu2.Item1.Tooltip"   DefaultValue="Select and merge cells with one click."/>
         <bt:String id="Menu2.Item2.Tooltip" DefaultValue="Unmerge ranges" />
+         <bt:String id="Menu2.Item3.Tooltip" DefaultValue="Split ranges into row or columns." />
        
       </bt:LongStrings>
     </Resources>

@@ -7,12 +7,14 @@ import { Paper } from "@mui/material";
 export default function RadioButton(props) {
   return (
     <React.Fragment>
-      <Paper elevation={3} sx={{ marginBottom: "10px", marginTop: "10px", padding:'10px'}}>
+      <Paper elevation={1} sx={{ marginBottom: "10px", marginTop: "10px", padding:'5px'}}>
+      <span style={{fontSize: '.9rem', fontWeight: '500'}}>{props.title}</span>
         <FormControl  sx={{
+          paddingLeft:'10px',
           display: "flex",
-          alignItems: "center",
           "& .MuiButtonBase-root": { padding: "5px", color: "black" },
-          "&. MuiButtonBase-root-MuiRadio-root": { color: "black" },
+          "& .MuiButtonBase-root-MuiRadio-root": { color: "black" },
+          "& .MuiFormControl-root":{alignItems: 'start'}
         }}>
           <RadioGroup
             aria-labelledby="demo-radio-buttons-group-label"
@@ -26,7 +28,8 @@ export default function RadioButton(props) {
               control={<Radio />}
               label={data.label}
               onChange={props.onChange}
-              style={{ height: 32, fontSize: 12 }}
+              style={{ height: 32 }}
+              sx={{'& .MuiTypography-root': {fontSize: ".8rem", fontWeight: '500'}}}
             />
             ))}
 

@@ -38,7 +38,13 @@ export const mergeUnmerge = [
   {
     id: "2",
     title: "Unmerge Ranges",
-    description: "Select and flip rows and columns horizontally or vertically.",
+    description: "Unmerge all merged ranges.",
     link: '/unmergeRanges'
+  },
+  {
+    id: "3",
+    title: "Split Ranges",
+    description: "Split selected ranges.",
+    link: '/splitRanges'
   },
 ];
