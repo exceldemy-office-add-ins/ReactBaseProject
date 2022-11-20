@@ -47,4 +47,10 @@ export const mergeUnmerge = [
     description: "Split selected ranges.",
     link: '/splitRanges'
   },
+  {
+    id: "4",
+    title: "Combine Ranges",
+    description: "Combine selected ranges.",
+    link: '/combineRanges'
+  },
 ];
