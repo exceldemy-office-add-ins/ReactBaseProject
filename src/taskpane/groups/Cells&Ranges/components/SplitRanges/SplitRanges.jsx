@@ -3,17 +3,15 @@ import OkCancelButton from "../../../../shared/reusableComponents/okCancelButton
 import RadioButton from "../../../../shared/reusableComponents/RadioButton";
 import RangeInputBox from "../../../../shared/reusableComponents/RangeInputBox";
 import Title from "../../../../shared/reusableComponents/Title";
-
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import { Paper, TextField } from "@mui/material";
 
 const radioInfo1 = [
   { id: "1", value: "rows", label: "Split to Rows" },
   { id: "2", value: "columns", label: "Split to Columns" },
-];
-
-const radioInfo2 = [
-  { id: "1", value: " ", label: "Space" },
-  { id: "2", value: ",", label: "Comma" },
-  { id: "3", value: ";", label: "Semicolon" },
 ];
 
 export default function SplitRanges() {
@@ -28,6 +26,7 @@ export default function SplitRanges() {
   const [data, setData] = React.useState("");
   const [sourceValues, setSourceValues] = React.useState("");
   const [focus, setFocus] = React.useState("source");
+  const [inputIsShown, setInputIsShown] = React.useState(false);
 
   const initialValue = async () => {
     try {
@@ -54,6 +53,15 @@ export default function SplitRanges() {
   };
 
   const splitTypeChangeHandler = (e) => {
+    setSplitType(e.target.value);
+    setInputIsShown(false);
+  };
+
+  const splitTypeChangeHandlerOther = (e) => {
+    setSplitType(e.target.value);
+    setInputIsShown(true);
+  };
+  const splitTypeChangeHandlerFromInput = (e) => {
     setSplitType(e.target.value);
   };
 
@@ -86,7 +94,7 @@ export default function SplitRanges() {
     try {
       await Excel.run(async (context) => {
         const range = context.workbook.worksheets.getActiveWorksheet().getRange(copiedRange);
-        range.load(["address", "rowCount", "columnCount", "values"]);
+        range.load(["rowCount", "columnCount", "values"]);
         await context.sync();
         setSourceValues(range.values);
         setRowNo(range.rowCount);
@@ -101,7 +109,7 @@ export default function SplitRanges() {
     try {
       await Excel.run(async (context) => {
         const range = context.workbook.worksheets.getActiveWorksheet().getRange(targetRange);
-        range.load(["address", "rowIndex", "columnIndex"]);
+        range.load(["rowIndex", "columnIndex"]);
         await context.sync();
         setRowIndex(range.rowIndex);
         setColumnIndex(range.columnIndex);
@@ -114,9 +122,10 @@ export default function SplitRanges() {
   const splitRangesRows = async () => {
     try {
       await Excel.run(async (context) => {
+        console.log(splitType);
         let sheet = context.workbook.worksheets.getActiveWorksheet();
         for (let i = 0; i < rowNo; i++) {
-          for (let j = 0; j < sourceValues[i][0].split(",").length; j++) {
+          for (let j = 0; j < sourceValues[i][0].split(`${splitType}`).length; j++) {
             sheet.getCell(rowIndex + i, columnIndex + j).values = sourceValues[i][0].split(`${splitType}`)[j];
           }
         }
@@ -132,7 +141,7 @@ export default function SplitRanges() {
       await Excel.run(async (context) => {
         let sheet = context.workbook.worksheets.getActiveWorksheet();
         for (let i = 0; i < rowNo; i++) {
-          for (let j = 0; j < sourceValues[i][0].split(",").length; j++) {
+          for (let j = 0; j < sourceValues[i][0].split(`${splitType}`).length; j++) {
             sheet.getCell(rowIndex + j, columnIndex + i).values = sourceValues[i][0].split(`${splitType}`)[j];
           }
         }
@@ -186,8 +195,79 @@ export default function SplitRanges() {
           onClick={sourceFocusChangeHandler}
         />
         <RadioButton title="Category" defaultValue="rows" formData={radioInfo1} onChange={selectionChangeHandler} />
-        <RadioButton title="Split Type" defaultValue=" " formData={radioInfo2} onChange={splitTypeChangeHandler} />
-      
+
+        <Paper elevation={1} sx={{ marginBottom: "10px", marginTop: "10px", padding: "5px" }}>
+        <span style={{fontSize: '.9rem', fontWeight: '500'}}>Split by</span>
+          <FormControl
+            sx={{
+              paddingLeft: "10px",
+              display: "flex",
+              "& .MuiButtonBase-root": { padding: "5px", color: "black" },
+              "& .MuiButtonBase-root-MuiRadio-root": { color: "black" },
+              "& .MuiFormControl-root": { alignItems: "start" },
+            }}
+          >
+            <RadioGroup aria-labelledby="demo-radio-buttons-group-label" name="radio-buttons-group2" defaultValue=" ">
+              <FormControlLabel
+                value=" "
+                control={<Radio />}
+                label="Space"
+                onChange={splitTypeChangeHandler}
+                style={{ height: 25 }}
+                sx={{ "& .MuiTypography-root": { fontSize: ".8rem", fontWeight: "500" } }}
+              />
+
+              <FormControlLabel
+                value=","
+                control={<Radio />}
+                label="Comma"
+                onChange={splitTypeChangeHandler}
+                style={{ height: 25 }}
+                sx={{ "& .MuiTypography-root": { fontSize: ".8rem", fontWeight: "500" } }}
+              />
+
+              <FormControlLabel
+                value=";"
+                control={<Radio />}
+                label="Semicolon"
+                onChange={splitTypeChangeHandler}
+                style={{ height: 25 }}
+                sx={{ "& .MuiTypography-root": { fontSize: ".8rem", fontWeight: "500" } }}
+              />
+
+              <FormControlLabel
+                value="other"
+                control={<Radio />}
+                label="Other"
+                onChange={splitTypeChangeHandlerOther}
+                style={{ height: 25 }}
+                sx={{ "& .MuiTypography-root": { fontSize: ".8rem", fontWeight: "500" } }}
+              />
+            </RadioGroup>
+          </FormControl>
+
+          {inputIsShown && (
+            <TextField
+              label="Other"
+              focused
+              size="small"
+              margin="none"
+              color="secondary"
+              sx={{
+                alignSelf: "center",
+                input: { height: "15px", padding: "5px 8px" },
+                div: {
+                  fontSize: "12px",
+                  color: "black",
+                },
+                marginBottom: "5px",
+                marginTop: "5px",
+              }}
+              type="text"
+              onChange={splitTypeChangeHandlerFromInput}
+            />
+          )}
+        </Paper>
 
         <RangeInputBox
           label="Target Range"
@@ -197,8 +277,8 @@ export default function SplitRanges() {
           onClick={targetFocusChangeHandler}
         />
 
-        {selection === 'rows' && <OkCancelButton onClick={splitRangesRows} />}
-        {selection === 'columns' && <OkCancelButton onClick={splitRangesColumns} />}
+        {selection === "rows" && <OkCancelButton onClick={splitRangesRows} />}
+        {selection === "columns" && <OkCancelButton onClick={splitRangesColumns} />}
       </React.Fragment>
     </div>
   );

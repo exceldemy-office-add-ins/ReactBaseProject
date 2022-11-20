@@ -28,7 +28,7 @@ export default function RadioButton(props) {
               control={<Radio />}
               label={data.label}
               onChange={props.onChange}
-              style={{ height: 32 }}
+              style={{ height: 25 }}
               sx={{'& .MuiTypography-root': {fontSize: ".8rem", fontWeight: '500'}}}
             />
             ))}
