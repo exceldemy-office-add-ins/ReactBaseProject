@@ -25,6 +25,11 @@ const radioInfo3 = [
   { id: "2", value: "bottom", label: "Bottom Cell" },
 ];
 
+const radioInfo4 = [
+  { id: "1", value: "keep", label: "Keep content of combined cells" },
+  { id: "2", value: "delete", label: "Delete content of combined cells" },
+];
+
 export default function CombineRanges() {
   const [copiedRange, setCopiedRange] = React.useState(" ");
   const [selection, setSelection] = React.useState("rows");
@@ -38,6 +43,7 @@ export default function CombineRanges() {
   const [inputIsShown, setInputIsShown] = React.useState(false);
   const [side, setSide] = React.useState("left");
   const [topBottom, setTopBottom] = React.useState("top");
+  const [options, setOptions] = React.useState("keep");
 
   const initialValue = async () => {
     try {
@@ -83,6 +89,10 @@ export default function CombineRanges() {
     setTopBottom(e.target.value);
   };
 
+  const optionsChangeHandler = (e) => {
+    setOptions(e.target.value);
+  };
+
   var eventResult;
 
   const dataRangeEvent = async () => {
@@ -115,7 +125,6 @@ export default function CombineRanges() {
         setColNo(range.columnCount);
         setRowIndex(range.rowIndex);
         setColumnIndex(range.columnIndex);
-        console.log(range.values);
       });
     } catch (error) {
       console.error(error);
@@ -126,19 +135,22 @@ export default function CombineRanges() {
     try {
       await Excel.run(async (context) => {
         let sheet = context.workbook.worksheets.getActiveWorksheet();
-        if (side === "left") {
-          for (let i = 0; i < rowNo; i++) {
+        if(options === 'delete'){
+          sheet.getRange(copiedRange).clear();
+        }
+        await context.sync();
+        for (let i = 0; i < rowNo; i++) {
+          if (side === "left") {
             sheet.getCell(rowIndex + i, columnIndex).values = sourceValues[i].join(`${separator}`);
             sheet.getCell(rowIndex + i, columnIndex).format.autofitRows();
             sheet.getCell(rowIndex + i, columnIndex).format.autofitColumns();
-          }
-        } else {
-          for (let i = 0; i < rowNo; i++) {
+          } else {
             sheet.getCell(rowIndex + i, columnIndex + colNo - 1).values = sourceValues[i].join(`${separator}`);
             sheet.getCell(rowIndex + i, columnIndex + colNo - 1).format.autofitRows();
             sheet.getCell(rowIndex + i, columnIndex + colNo - 1).format.autofitColumns();
           }
         }
+     
         await context.sync();
       });
     } catch (error) {
@@ -150,6 +162,9 @@ export default function CombineRanges() {
     try {
       await Excel.run(async (context) => {
         let sheet = context.workbook.worksheets.getActiveWorksheet();
+        if(options === 'delete'){
+          sheet.getRange(copiedRange).clear();
+        }
         for (let i = 0; i < colNo; i++) {
           let concatColValue = "";
           for (let j = 0; j < rowNo; j++) {
@@ -157,8 +172,12 @@ export default function CombineRanges() {
           }
           if (topBottom === "top") {
             sheet.getCell(rowIndex, columnIndex + i).values = concatColValue;
+            sheet.getCell(rowIndex, columnIndex + i).format.autofitRows();
+            sheet.getCell(rowIndex, columnIndex + i).format.autofitColumns();
           } else {
             sheet.getCell(rowIndex + rowNo - 1, columnIndex + i).values = concatColValue;
+            sheet.getCell(rowIndex + rowNo - 1, columnIndex + i).format.autofitRows();
+            sheet.getCell(rowIndex + rowNo - 1, columnIndex + i).format.autofitColumns();
           }
         }
 
@@ -168,7 +187,7 @@ export default function CombineRanges() {
       console.log(error);
     }
   };
-
+  
   useEffect(() => {
     initialValue();
     dataRangeEvent();
@@ -266,22 +285,29 @@ export default function CombineRanges() {
         )}
       </Paper>
 
-     {selection === 'rows' &&  <HorizontalRadioButton
-        title="Place the results to:"
-        defaultValue="left"
-        formData={radioInfo2}
-        onChange={sideChangeHandler}
-      />}
+      {selection === "rows" && (
+        <HorizontalRadioButton
+          title="Place the results to:"
+          defaultValue="left"
+          formData={radioInfo2}
+          onChange={sideChangeHandler}
+        />
+      )}
 
-      {selection === "columns" && <HorizontalRadioButton
-        title="Place the results to:"
-        defaultValue="top"
-        formData={radioInfo3}
-        onChange={topBottomChangeHandler}
-      />}
+      {selection === "columns" && (
+        <HorizontalRadioButton
+          title="Place the results to:"
+          defaultValue="top"
+          formData={radioInfo3}
+          onChange={topBottomChangeHandler}
+        />
+      )}
+
+      <RadioButton title="Options" defaultValue ="keep" formData={radioInfo4} onChange= {optionsChangeHandler} />
 
       {selection === "rows" && <OkCancelButton onClick={combineRangesRows} />}
       {selection === "columns" && <OkCancelButton onClick={combineRangesColumns} />}
+
     </React.Fragment>
   );
 }
