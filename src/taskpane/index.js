@@ -1,21 +1,18 @@
 import App from "../taskpane/App";
 import * as React from "react";
-import { createRoot } from 'react-dom/client';
-
-import './index.css';
+import * as ReactDOM from "react-dom";
 import { HashRouter } from "react-router-dom";
+import './index.css'
 
 /* global document, Office, module, require */
 
 let isOfficeInitialized = false;
 const render = (Component) => {
-  const container= document.getElementById("app");
-  const root = createRoot(container);
-  root.render(
+  ReactDOM.render(
     <HashRouter>
-      <Component isOfficeInitialized={isOfficeInitialized}/> </HashRouter>
+      <Component isOfficeInitialized={isOfficeInitialized}/> </HashRouter>,
+        document.getElementById("container")
   );
-
 };
 
 /* Render application after Office initializes */
@@ -23,6 +20,7 @@ Office.onReady(() => {
   isOfficeInitialized = true;
   render(App);
 });
-
+/* Initial render showing a progress bar */
+render(App);
 
 
