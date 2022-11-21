@@ -16,9 +16,14 @@ const radioInfo1 = [
 ];
 
 const radioInfo2 = [
-    { id: "1", value: "left", label: "Left Cell" },
-    { id: "2", value: "right", label: "Right Cell" },
-  ];
+  { id: "1", value: "left", label: "Left Cell" },
+  { id: "2", value: "right", label: "Right Cell" },
+];
+
+const radioInfo3 = [
+  { id: "1", value: "top", label: "Top Cell" },
+  { id: "2", value: "bottom", label: "Bottom Cell" },
+];
 
 export default function CombineRanges() {
   const [copiedRange, setCopiedRange] = React.useState(" ");
@@ -31,7 +36,8 @@ export default function CombineRanges() {
   const [data, setData] = React.useState("");
   const [sourceValues, setSourceValues] = React.useState("");
   const [inputIsShown, setInputIsShown] = React.useState(false);
-  const [side, setSide] = React.useState('left');
+  const [side, setSide] = React.useState("left");
+  const [topBottom, setTopBottom] = React.useState("top");
 
   const initialValue = async () => {
     try {
@@ -52,7 +58,6 @@ export default function CombineRanges() {
     setCopiedRange(e.target.value);
   };
 
-
   const separatorChangeHandler = (e) => {
     setSeparatorType(e.target.value);
     setInputIsShown(false);
@@ -70,9 +75,13 @@ export default function CombineRanges() {
     setSelection(e.target.value);
   };
 
-  const sideChangeHandler= (e)=>{
+  const sideChangeHandler = (e) => {
     setSide(e.target.value);
-  }
+  };
+
+  const topBottomChangeHandler = (e) => {
+    setTopBottom(e.target.value);
+  };
 
   var eventResult;
 
@@ -106,30 +115,29 @@ export default function CombineRanges() {
         setColNo(range.columnCount);
         setRowIndex(range.rowIndex);
         setColumnIndex(range.columnIndex);
-        console.log(range.values)
+        console.log(range.values);
       });
     } catch (error) {
       console.error(error);
     }
   };
 
-
   const combineRangesRows = async () => {
     try {
       await Excel.run(async (context) => {
         let sheet = context.workbook.worksheets.getActiveWorksheet();
-        if(side==='left'){
-            for (let i = 0; i < rowNo; i++) {
-                sheet.getCell(rowIndex + i, columnIndex).values = sourceValues[i].join(`${separator}`);
-                sheet.getCell(rowIndex + i, columnIndex).format.autofitRows();
-                sheet.getCell(rowIndex + i, columnIndex).format.autofitColumns();
-            }
-        }else{
-            for (let i = 0; i < rowNo; i++) {
-                sheet.getCell(rowIndex + i, columnIndex + colNo - 1).values = sourceValues[i].join(`${separator}`);
-                sheet.getCell(rowIndex + i, columnIndex + colNo - 1).format.autofitRows();
-                sheet.getCell(rowIndex + i, columnIndex + colNo - 1).format.autofitColumns();
-            }
+        if (side === "left") {
+          for (let i = 0; i < rowNo; i++) {
+            sheet.getCell(rowIndex + i, columnIndex).values = sourceValues[i].join(`${separator}`);
+            sheet.getCell(rowIndex + i, columnIndex).format.autofitRows();
+            sheet.getCell(rowIndex + i, columnIndex).format.autofitColumns();
+          }
+        } else {
+          for (let i = 0; i < rowNo; i++) {
+            sheet.getCell(rowIndex + i, columnIndex + colNo - 1).values = sourceValues[i].join(`${separator}`);
+            sheet.getCell(rowIndex + i, columnIndex + colNo - 1).format.autofitRows();
+            sheet.getCell(rowIndex + i, columnIndex + colNo - 1).format.autofitColumns();
+          }
         }
         await context.sync();
       });
@@ -138,15 +146,22 @@ export default function CombineRanges() {
     }
   };
 
-  const splitRangesColumns = async () => {
+  const combineRangesColumns = async () => {
     try {
       await Excel.run(async (context) => {
         let sheet = context.workbook.worksheets.getActiveWorksheet();
-        for (let i = 0; i < rowNo; i++) {
-          for (let j = 0; j < sourceValues[i][0].split(`${separator}`).length; j++) {
-            sheet.getCell(rowIndex + j, columnIndex + i).values = sourceValues[i][0].split(`${separator}`)[j];
+        for (let i = 0; i < colNo; i++) {
+          let concatColValue = "";
+          for (let j = 0; j < rowNo; j++) {
+            concatColValue = concatColValue.concat(sourceValues[j][i]);
+          }
+          if (topBottom === "top") {
+            sheet.getCell(rowIndex, columnIndex + i).values = concatColValue;
+          } else {
+            sheet.getCell(rowIndex + rowNo - 1, columnIndex + i).values = concatColValue;
           }
         }
+
         await context.sync();
       });
     } catch (error) {
@@ -163,22 +178,14 @@ export default function CombineRanges() {
   }, [copiedRange]);
 
   useEffect(() => {
-      setCopiedRange(data);
+    setCopiedRange(data);
   }, [data]);
-
 
   return (
     <React.Fragment>
-      <Title
-        title="Combine Ranges"
-      />
+      <Title title="Combine Ranges" />
 
-      <RangeInputBox
-        label="Source Range"
-        value={copiedRange}
-        color="success"
-        onChange={sourceRangeHandler}
-      />
+      <RangeInputBox label="Source Range" value={copiedRange} color="success" onChange={sourceRangeHandler} />
       <RadioButton
         title="To combine selected cells according to following options:"
         defaultValue="rows"
@@ -259,15 +266,22 @@ export default function CombineRanges() {
         )}
       </Paper>
 
-      <HorizontalRadioButton
+     {selection === 'rows' &&  <HorizontalRadioButton
         title="Place the results to:"
         defaultValue="left"
         formData={radioInfo2}
         onChange={sideChangeHandler}
-      />
+      />}
+
+      {selection === "columns" && <HorizontalRadioButton
+        title="Place the results to:"
+        defaultValue="top"
+        formData={radioInfo3}
+        onChange={topBottomChangeHandler}
+      />}
 
       {selection === "rows" && <OkCancelButton onClick={combineRangesRows} />}
-      {selection === "columns" && <OkCancelButton onClick={splitRangesColumns} />}
+      {selection === "columns" && <OkCancelButton onClick={combineRangesColumns} />}
     </React.Fragment>
   );
 }
