@@ -160,7 +160,7 @@ export default function Transpose() {
       <RangeInputBox
         label="Destination Range"
         value={targetRange}
-        color="error"
+        color="primary"
         onChange={targetRangeHandler}
         onClick={targetFocusChangeHandler}
       />

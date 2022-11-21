@@ -252,7 +252,7 @@ export default function SplitRanges() {
               focused
               size="small"
               margin="none"
-              color="secondary"
+              color="success"
               sx={{
                 alignSelf: "center",
                 input: { height: "15px", padding: "5px 8px" },
@@ -272,7 +272,7 @@ export default function SplitRanges() {
         <RangeInputBox
           label="Target Range"
           value={targetRange}
-          color="error"
+          color="primary"
           onChange={targetRangeHandler}
           onClick={targetFocusChangeHandler}
         />

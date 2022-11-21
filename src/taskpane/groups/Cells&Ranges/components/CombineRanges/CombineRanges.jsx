@@ -12,7 +12,7 @@ import HorizontalRadioButton from "../../../../shared/reusableComponents/Horizon
 const radioInfo1 = [
   { id: "1", value: "rows", label: "Combine rows" },
   { id: "2", value: "columns", label: "Combine columns" },
-  { id: "3", value: "singleCell", label: "Combine into single cell" },
+  // { id: "3", value: "singleCell", label: "Combine into single cell" },
 ];
 
 const radioInfo2 = [
@@ -268,7 +268,7 @@ export default function CombineRanges() {
             focused
             size="small"
             margin="none"
-            color="secondary"
+            color="success"
             sx={{
               alignSelf: "center",
               input: { height: "15px", padding: "5px 8px" },
