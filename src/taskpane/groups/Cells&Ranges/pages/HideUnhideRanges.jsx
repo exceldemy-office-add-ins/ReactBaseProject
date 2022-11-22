@@ -61,13 +61,13 @@ export default function HideUnhideRanges() {
   return (
     <React.Fragment>
       <Title title="Hide Ranges" />
-      <RangeInputBox label="Selected Range" color="success" value={ranges} onChange={inputChangeHandler} />
+      <RangeInputBox label="Selected Range" color="success" value={ranges} onChange={inputChangeHandler} selectedRange={ranges} />
 
       <RadioButton defaultValue="continuousSelection" formData={radioInfo} onChange={selectionChangeHandler} />
 
-      {selection === "continuousSelection" && <HideSelectedRanges selection={ranges} />}
-      {selection === "multipleDiscontinuousSelection" && <HideDiscontinuousRanges selection={ranges} />}
-      {selection === "allExceptSelectedRanges" && <HideAllExceptSelectedRanges selection={ranges} />}
+      {selection === "continuousSelection" && <HideSelectedRanges selectedRange={ranges} />}
+      {selection === "multipleDiscontinuousSelection" && <HideDiscontinuousRanges selectedRange={ranges} />}
+      {selection === "allExceptSelectedRanges" && <HideAllExceptSelectedRanges selectedRange={ranges} />}
     </React.Fragment>
   );
 }

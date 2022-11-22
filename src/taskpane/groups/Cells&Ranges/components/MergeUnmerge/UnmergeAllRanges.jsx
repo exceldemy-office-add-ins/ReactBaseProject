@@ -1,7 +1,7 @@
 import React from "react";
 import OkCancelButton from "../../../../shared/reusableComponents/okCancelButton";
 
-export default function UnmergeAllRanges() {
+export default function UnmergeAllRanges({selectedRange}) {
   const unmergeAll = async () => {
     try {
       await Excel.run(async (context) => {

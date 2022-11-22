@@ -2,11 +2,11 @@ import React from "react";
 
 import OkCancelButton from "../../../../shared/reusableComponents/okCancelButton";
 
-export default function HideDiscontinuousRanges({ selection }) {
+export default function HideDiscontinuousRanges({ selectedRange }) {
   const hideDiscontinuousRanges = async () => {
     try {
       await Excel.run(async (context) => {
-        let sepValues = selection.split(",");
+        let sepValues = selectedRange.split(",");
 
         const sheet = context.workbook.worksheets.getActiveWorksheet();
         for (let i = 0; i < sepValues.length; i++) {
@@ -21,7 +21,7 @@ export default function HideDiscontinuousRanges({ selection }) {
   };
   return (
     <React.Fragment>
-     <OkCancelButton onClick={hideDiscontinuousRanges}/>
+     <OkCancelButton onClick={hideDiscontinuousRanges} selectedRange={selectedRange}/>
     </React.Fragment>
   );
 }

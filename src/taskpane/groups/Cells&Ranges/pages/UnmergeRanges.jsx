@@ -60,12 +60,20 @@ export default function UnmergeRanges() {
   return (
     <React.Fragment>
       <Title title=" Unmerge Ranges" />
-      <RangeInputBox label="Selected Range" color="success" value={ranges} onChange={inputChangeHandler} />
+      {selection === "unmergeSelection" && (
+        <RangeInputBox
+          label="Selected Range"
+          color="success"
+          value={ranges}
+          onChange={inputChangeHandler}
+          selectedRange={ranges}
+        />
+      )}
 
       <RadioButton defaultValue="unmergeSelection" formData={radioInfo} onChange={selectionChangeHandler} />
 
-      {selection === "unmergeSelection" && <UnmergeSelectedRanges selection={ranges} />}
-      {selection === "unmergeAll" && <UnmergeAllRanges selection={ranges} />}
+      {selection === "unmergeSelection" && <UnmergeSelectedRanges selectedRange={ranges} />}
+      {selection === "unmergeAll" && <UnmergeAllRanges selectedRange={ranges} />}
     </React.Fragment>
   );
 }

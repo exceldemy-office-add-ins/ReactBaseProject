@@ -2,8 +2,8 @@ import React from "react";
 
 import OkCancelButton from "../../../../shared/reusableComponents/okCancelButton";
 
-export default function HideSelectedRanges(props) {
-  let rng = props.selection;
+export default function HideSelectedRanges({selectedRange}) {
+  let rng = selectedRange;
   const hideSelectedRanges = async () => {
     try {
       await Excel.run(async (context) => {
@@ -18,7 +18,7 @@ export default function HideSelectedRanges(props) {
 
   return (
     <React.Fragment>
-     <OkCancelButton onClick={hideSelectedRanges} />
+     <OkCancelButton onClick={hideSelectedRanges} selectedRange={selectedRange} />
     </React.Fragment>
   );
 }

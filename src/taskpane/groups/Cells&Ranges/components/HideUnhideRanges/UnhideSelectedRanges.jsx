@@ -2,7 +2,7 @@ import React from 'react'
 import OkCancelButton from '../../../../shared/reusableComponents/okCancelButton';
 
 export default function UnhideSelectedRanges(props) {
-    let rng = props.selection;
+    let rng = props.selectedRange;
     const unhideSelectedRanges = async () => {
       try {
         await Excel.run(async (context) => {

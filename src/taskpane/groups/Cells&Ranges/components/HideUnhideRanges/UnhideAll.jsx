@@ -2,7 +2,7 @@ import React from "react";
 
 import OkCancelButton from "../../../../shared/reusableComponents/okCancelButton";
 
-export default function UnhideAll() {
+export default function UnhideAll({selectedRange}) {
   const unhideAll = async () => {
     try {
       await Excel.run(async (context) => {
@@ -17,7 +17,7 @@ export default function UnhideAll() {
   };
   return (
     <React.Fragment>
-     <OkCancelButton onClick={unhideAll} />
+     <OkCancelButton onClick={unhideAll} selectedRange={selectedRange}  />
     </React.Fragment>
   );
 }

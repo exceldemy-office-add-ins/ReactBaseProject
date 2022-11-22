@@ -4,7 +4,7 @@ import OkCancelButton from "../../../../shared/reusableComponents/okCancelButton
 
 const Horizontally = (props) => {
 
-  let rng = props.sourceRanges;
+  let rng = props.selectedRange;
 
   const horizontalFlip = async () => {
     try {
@@ -33,7 +33,7 @@ const Horizontally = (props) => {
   };
   return (
     <div>      
-    <OkCancelButton onClick={horizontalFlip} />
+    <OkCancelButton onClick={horizontalFlip} selectedRange={props.selectedRange} />
     </div>
   );
 };

@@ -61,7 +61,7 @@ export default function FlipRanges() {
     <React.Fragment>
       <Title title="Filp Ranges" />
 
-      <RangeInputBox label="Selected Range" color="success" value={ranges} onChange={inputRangeHandler} />
+      <RangeInputBox label="Selected Range" color="success" value={ranges} onChange={inputRangeHandler} selectedRange={ranges} />
 
       <Typography variant="subtitle2" component="div">
         Decide whether to Flip the selected ranges Horizontally or Vertically
@@ -78,8 +78,8 @@ export default function FlipRanges() {
 
       <HorizontalRadioButton title="Selection Type" defaultValue="horizontally" formData={radioInfo} onChange={selectionChangeHandler} />
 
-      {selection === "horizontally" && <Horizontally sourceRanges={ranges} />}
-      {selection === "vertically" && <Vertically sourceRanges={ranges} />}
+      {selection === "horizontally" && <Horizontally selectedRange={ranges} />}
+      {selection === "vertically" && <Vertically selectedRange={ranges} />}
     </React.Fragment>
   );
 }

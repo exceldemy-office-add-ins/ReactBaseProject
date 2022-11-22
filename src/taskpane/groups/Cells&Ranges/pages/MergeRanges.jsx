@@ -7,14 +7,14 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import MergeSelectedRanges from "../components/MergeUnmerge/MergeSelectedRanges";
 import MergeAllExceptSelectedRanges from "../components/MergeUnmerge/MergeAllExceptSelectedRanges.";
-import { Typography } from "@mui/material";
+import { Alert, Typography } from "@mui/material";
 import Title from "../../../shared/reusableComponents/Title";
 import RadioButton from "../../../shared/reusableComponents/RadioButton";
 
-const radioInfo= [
-  {id: '1', value: 'mergeSelection', label: 'Only the Selected Range'},
-  {id: '2', value: 'mergeAllExceptSelection', label: 'All Except Selected Ranges'}, 
-]
+const radioInfo = [
+  { id: "1", value: "mergeSelection", label: "Only the Selected Range" },
+  { id: "2", value: "mergeAllExceptSelection", label: "All Except Selected Ranges" },
+];
 
 export default function MergeRanges() {
   const [ranges, setRanges] = React.useState("");
@@ -63,14 +63,22 @@ export default function MergeRanges() {
   }, []);
   return (
     <React.Fragment>
-     <Title title="Merge Ranges" />
+      <Title title="Merge Ranges" />
       <RangeInputBox label="Selected Range" color="success" value={ranges} onChange={inputChangeHandler} />
+      {ranges === "" && (
+        <Alert
+          severity="error"
+          style={{ marginBottom: "5px", fontWeight: "600" }}
+          sx={{ "& .MuiAlert-icon": { padding: "0px" }, "& .MuiAlert-message": { padding: "0px" } }}
+        >
+          Please! Select a Range.
+        </Alert>
+      )}
+      {/* 
+      <RadioButton defaultValue="mergeSelection" formData={radioInfo} onChange={selectionChangeHandler} /> */}
 
-      <RadioButton defaultValue="mergeSelection" formData={radioInfo} onChange={selectionChangeHandler} />
-      
       {selection === "mergeSelection" && <MergeSelectedRanges selection={ranges} />}
-      {selection === "mergeAllExceptSelection" && <MergeAllExceptSelectedRanges selection={ranges} />}
-      
+      {/* {selection === "mergeAllExceptSelection" && <MergeAllExceptSelectedRanges selection={ranges} />} */}
     </React.Fragment>
   );
 }

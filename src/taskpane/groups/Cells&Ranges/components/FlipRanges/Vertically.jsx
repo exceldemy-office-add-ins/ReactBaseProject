@@ -3,7 +3,7 @@ import React from "react";
 import OkCancelButton from "../../../../shared/reusableComponents/okCancelButton";
 
 const Vertically = (props) => {
-  let rng = props.sourceRanges;
+  let rng = props.selectedRange;
   const verticalFlip = async () => {
     try {
       await Excel.run(async (context) => {
@@ -31,7 +31,7 @@ const Vertically = (props) => {
   };
   return (
     <div>
-      <OkCancelButton onClick={verticalFlip}/>
+      <OkCancelButton onClick={verticalFlip} selectedRange={props.selectedRange}/>
     </div>
   );
 };

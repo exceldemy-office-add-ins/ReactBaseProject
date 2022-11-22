@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import React from 'react'
 import OkCancelButton from '../../../../shared/reusableComponents/okCancelButton';
 
@@ -22,8 +22,8 @@ export default function MergeSelectedRanges({selection}) {
       };
   return (
     <React.Fragment>
-      <Typography color='error' variant="body2">Merging cells only keeps the upper-left value and discards other values.</Typography>
-    <OkCancelButton onClick={mergeRanges}/>
+    <OkCancelButton onClick={mergeRanges} selectedRange= {selection}/>
+      <Typography variant="body2" style={{padding:'10px'}}><span style={{fontWeight: '600'}}>Info:</span> Merging cells only keeps the upper-left value and discards other values.</Typography>
    </React.Fragment>
   )
 }

@@ -15,8 +15,8 @@ const radioInfo1 = [
 ];
 
 export default function SplitRanges() {
-  const [copiedRange, setCopiedRange] = React.useState(" ");
-  const [targetRange, setTargetRange] = React.useState("");
+  const [copiedRange, setCopiedRange] = React.useState("");
+  const [targetRange, setTargetRange] = React.useState(" ");
   const [selection, setSelection] = React.useState("rows");
   const [splitType, setSplitType] = React.useState("");
   const [rowNo, setRowNo] = React.useState("");
@@ -193,6 +193,8 @@ export default function SplitRanges() {
           color="success"
           onChange={sourceRangeHandler}
           onClick={sourceFocusChangeHandler}
+          selectedRange={copiedRange}
+          
         />
         <RadioButton title="Category" defaultValue="rows" formData={radioInfo1} onChange={selectionChangeHandler} />
 
@@ -275,10 +277,11 @@ export default function SplitRanges() {
           color="primary"
           onChange={targetRangeHandler}
           onClick={targetFocusChangeHandler}
+          selectedRange= {targetRange}
         />
 
-        {selection === "rows" && <OkCancelButton onClick={splitRangesRows} />}
-        {selection === "columns" && <OkCancelButton onClick={splitRangesColumns} />}
+        {selection === "rows" && <OkCancelButton onClick={splitRangesRows} selectedRange={copiedRange} />}
+        {selection === "columns" && <OkCancelButton onClick={splitRangesColumns}  selectedRange={copiedRange} />}
       </React.Fragment>
     </div>
   );

@@ -11,7 +11,7 @@ const radioInfo = [
 
 export default function Transpose() {
   const [copiedRange, setCopiedRange] = React.useState("");
-  const [targetRange, setTargetRange] = React.useState("");
+  const [targetRange, setTargetRange] = React.useState(" ");
   const [selection, setSelection] = React.useState("tableToList");
   const [rowNo, setRowNo] = React.useState("");
   const [colNo, setColNo] = React.useState("");
@@ -153,6 +153,7 @@ export default function Transpose() {
         color="success"
         onChange={sourceRangeHandler}
         onClick={sourceFocusChangeHandler}
+        selectedRange= {copiedRange}
       />
 
       <RadioButton title="Transpose Type" defaultValue="tableToList" formData={radioInfo} onChange={selectionChangeHandler} />
@@ -163,6 +164,7 @@ export default function Transpose() {
         color="primary"
         onChange={targetRangeHandler}
         onClick={targetFocusChangeHandler}
+        selectedRange= {targetRange}
       />
 
       <OkCancelButton onClick={tableToList} />

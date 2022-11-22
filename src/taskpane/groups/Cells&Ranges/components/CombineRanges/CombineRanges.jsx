@@ -204,7 +204,7 @@ export default function CombineRanges() {
     <React.Fragment>
       <Title title="Combine Ranges" />
 
-      <RangeInputBox label="Source Range" value={copiedRange} color="success" onChange={sourceRangeHandler} />
+      <RangeInputBox label="Source Range" value={copiedRange} color="success" onChange={sourceRangeHandler} selectedRange={copiedRange} />
       <RadioButton
         title="To combine selected cells according to following options:"
         defaultValue="rows"
@@ -305,8 +305,8 @@ export default function CombineRanges() {
 
       <RadioButton title="Options" defaultValue ="keep" formData={radioInfo4} onChange= {optionsChangeHandler} />
 
-      {selection === "rows" && <OkCancelButton onClick={combineRangesRows} />}
-      {selection === "columns" && <OkCancelButton onClick={combineRangesColumns} />}
+      {selection === "rows" && <OkCancelButton onClick={combineRangesRows} selectedRange={copiedRange} />}
+      {selection === "columns" && <OkCancelButton onClick={combineRangesColumns} selectedRange={copiedRange} />}
 
     </React.Fragment>
   );

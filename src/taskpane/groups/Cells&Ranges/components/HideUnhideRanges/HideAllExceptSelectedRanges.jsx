@@ -2,7 +2,7 @@ import React from "react";
 
 import OkCancelButton from "../../../../shared/reusableComponents/okCancelButton";
 
-export default function HideAllExceptSelectedRanges({selection}) {
+export default function HideAllExceptSelectedRanges({selectedRange}) {
 
     const hideAllExceptSelectedRanges = async () => {
         try {
@@ -12,7 +12,7 @@ export default function HideAllExceptSelectedRanges({selection}) {
             range2.rowHidden= true;
             await context.sync();
 
-            let sepValues = selection.split(",");
+            let sepValues = selectedRange.split(",");
             const sheet = context.workbook.worksheets.getActiveWorksheet();
             for (let i = 0; i < sepValues.length; i++) {
               sheet.getRange(sepValues[i]).rowHidden = false;
@@ -27,7 +27,7 @@ export default function HideAllExceptSelectedRanges({selection}) {
       };
   return (
     <React.Fragment>
-    <OkCancelButton  onClick={hideAllExceptSelectedRanges}/>
+    <OkCancelButton  onClick={hideAllExceptSelectedRanges} selectedRange={selectedRange}/>
   </React.Fragment>
   )
 }
