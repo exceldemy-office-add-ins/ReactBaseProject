@@ -60,11 +60,19 @@ export default function HideUnhideRanges() {
     <React.Fragment>
       <Title title="Unhide Ranges" />
 
-      <RangeInputBox label="Selected Range" color="success" value={ranges} onChange={inputChangeHandler} selectedRange={ranges}/>
+      {selection === "unhideSelectedRanges" && (
+        <RangeInputBox
+          label="Selected Range"
+          color="success"
+          value={ranges}
+          onChange={inputChangeHandler}
+          selectedRange={ranges}
+        />
+      )}
 
       <RadioButton defaultValue="unhideSelectedRanges" formData={radioInfo} onChange={selectionChangeHandler} />
       {selection === "unhideSelectedRanges" && <UnhideSelectedRanges selectedRange={ranges} />}
-      {selection === "unhideAll" && <UnhideAll selectedRange={ranges} />}
+      {selection === "unhideAll" && <UnhideAll />}
     </React.Fragment>
   );
 }
