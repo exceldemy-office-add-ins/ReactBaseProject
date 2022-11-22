@@ -26,7 +26,7 @@ export default function HideUnhideRanges() {
   const initialValue = async () => {
     try {
       await Excel.run(async (context) => {
-        const range = context.workbook.getSelectedRange();
+        const range = context.workbook.getSelectedRanges();
         range.load("address");
         await context.sync();
         setRanges(range.address);
