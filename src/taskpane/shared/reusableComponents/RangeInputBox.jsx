@@ -15,11 +15,13 @@ export default function RangeInputBox(props) {
             alignSelf: "center",
             input: { height: "1rem" },
             div: {
-              fontSize: "15px",
+              fontSize: ".85rem",
               color: "black",
+              minWidth: '275px'
             },
             marginBottom: "5px",
             marginTop: "5px",
+            legend:{width:'95px'}
           }}
           type="text"
           value={props.value}
