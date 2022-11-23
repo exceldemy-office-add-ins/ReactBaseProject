@@ -14,16 +14,16 @@ const radioInfo1 = [
   { id: "2", value: "columns", label: "Split to Columns" },
 ];
 
-export default function SplitRanges() {
-  const [copiedRange, setCopiedRange] = React.useState("");
+export default function SplitRanges({isOfficeInitialized}) {
+  const [copiedRange, setCopiedRange] = React.useState(" ");
   const [targetRange, setTargetRange] = React.useState(" ");
   const [selection, setSelection] = React.useState("rows");
-  const [splitType, setSplitType] = React.useState("");
+  const [splitType, setSplitType] = React.useState(" ");
   const [rowNo, setRowNo] = React.useState("");
   const [colNo, setColNo] = React.useState("");
   const [rowIndex, setRowIndex] = React.useState("");
   const [columnIndex, setColumnIndex] = React.useState("");
-  const [data, setData] = React.useState("");
+  const [data, setData] = React.useState(" ");
   const [sourceValues, setSourceValues] = React.useState("");
   const [focus, setFocus] = React.useState("source");
   const [inputIsShown, setInputIsShown] = React.useState(false);
@@ -34,7 +34,7 @@ export default function SplitRanges() {
         const range = context.workbook.getSelectedRanges();
         range.load("address");
         await context.sync();
-        setData(range.address);
+        // setData(range.address);
         setCopiedRange(range.address);
       });
     } catch (error) {
@@ -153,9 +153,13 @@ export default function SplitRanges() {
   };
 
   useEffect(() => {
+    if(isOfficeInitialized){
     initialValue();
     dataRangeEvent();
-  }, []);
+  }
+  }, [isOfficeInitialized]);
+
+  
   useEffect(() => {
     getSourceRangeData();
   }, [copiedRange]);
@@ -194,12 +198,11 @@ export default function SplitRanges() {
           onChange={sourceRangeHandler}
           onClick={sourceFocusChangeHandler}
           selectedRange={copiedRange}
-          
         />
         <RadioButton title="Category" defaultValue="rows" formData={radioInfo1} onChange={selectionChangeHandler} />
 
         <Paper elevation={1} sx={{ marginBottom: "10px", marginTop: "10px", padding: "5px" }}>
-        <span style={{fontSize: '.9rem', fontWeight: '500'}}>Split by</span>
+          <span style={{ fontSize: ".9rem", fontWeight: "500" }}>Split by</span>
           <FormControl
             sx={{
               paddingLeft: "10px",
@@ -214,6 +217,15 @@ export default function SplitRanges() {
                 value=" "
                 control={<Radio />}
                 label="Space"
+                onChange={splitTypeChangeHandler}
+                style={{ height: 25 }}
+                sx={{ "& .MuiTypography-root": { fontSize: ".8rem", fontWeight: "500" } }}
+              />
+
+              <FormControlLabel
+                value=""
+                control={<Radio />}
+                label="Nothing"
                 onChange={splitTypeChangeHandler}
                 style={{ height: 25 }}
                 sx={{ "& .MuiTypography-root": { fontSize: ".8rem", fontWeight: "500" } }}
@@ -277,11 +289,11 @@ export default function SplitRanges() {
           color="primary"
           onChange={targetRangeHandler}
           onClick={targetFocusChangeHandler}
-          selectedRange= {targetRange}
+          selectedRange={targetRange}
         />
 
         {selection === "rows" && <OkCancelButton onClick={splitRangesRows} selectedRange={copiedRange} />}
-        {selection === "columns" && <OkCancelButton onClick={splitRangesColumns}  selectedRange={copiedRange} />}
+        {selection === "columns" && <OkCancelButton onClick={splitRangesColumns} selectedRange={copiedRange} />}
       </React.Fragment>
     </div>
   );

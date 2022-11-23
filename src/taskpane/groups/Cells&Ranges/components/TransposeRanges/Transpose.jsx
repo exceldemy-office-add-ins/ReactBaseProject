@@ -1,3 +1,4 @@
+import { Alert } from "@mui/material";
 import React, { useEffect } from "react";
 import OkCancelButton from "../../../../shared/reusableComponents/okCancelButton";
 import RadioButton from "../../../../shared/reusableComponents/RadioButton";
@@ -9,15 +10,15 @@ const radioInfo = [
   { id: "2", value: "listToTable", label: "List to Table" },
 ];
 
-export default function Transpose() {
-  const [copiedRange, setCopiedRange] = React.useState("");
+export default function Transpose({isOfficeInitialized}) {
+  const [copiedRange, setCopiedRange] = React.useState(" ");
   const [targetRange, setTargetRange] = React.useState(" ");
   const [selection, setSelection] = React.useState("tableToList");
   const [rowNo, setRowNo] = React.useState("");
   const [colNo, setColNo] = React.useState("");
   const [rowIndex, setRowIndex] = React.useState("");
   const [columnIndex, setColumnIndex] = React.useState("");
-  const [data, setData] = React.useState("");
+  const [data, setData] = React.useState(" ");
   const [sourceValues, setSourceValues] = React.useState("");
   const [focus, setFocus] = React.useState("source");
 
@@ -27,7 +28,7 @@ export default function Transpose() {
         const range = context.workbook.getSelectedRanges();
         range.load("address");
         await context.sync();
-        setData(range.address);
+        // setData(range.address);
         setCopiedRange(range.address);
       });
     } catch (error) {
@@ -117,9 +118,11 @@ export default function Transpose() {
   };
 
   useEffect(() => {
+    if(isOfficeInitialized){
     initialValue();
     dataRangeEvent();
-  }, []);
+  }
+  }, [isOfficeInitialized]);
   useEffect(() => {
     getSourceRangeData();
   }, [copiedRange]);
@@ -143,6 +146,7 @@ export default function Transpose() {
     setFocus("target");
   };
 
+
   return (
     <React.Fragment>
       <Title title="Transpose Dimensions" articleLink= "https://www.exceldemy.com/excel-transpose-rows-to-columns-based-on-criteria/" />
@@ -153,8 +157,9 @@ export default function Transpose() {
         color="success"
         onChange={sourceRangeHandler}
         onClick={sourceFocusChangeHandler}
-        selectedRange= {copiedRange}
+        selectedRange={copiedRange}
       />
+
 
       <RadioButton title="Transpose Type" defaultValue="tableToList" formData={radioInfo} onChange={selectionChangeHandler} />
 

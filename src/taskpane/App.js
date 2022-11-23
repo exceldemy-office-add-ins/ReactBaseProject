@@ -18,7 +18,6 @@ import SplitNames from "./groups/Cells&Ranges/components/SplitRanges/SplitNames"
 
 const App = (props) => {
   const isOfficeInitialized = props.isOfficeInitialized;
-  console.log(isOfficeInitialized)
  
   return(
     <React.Fragment>
@@ -29,17 +28,17 @@ const App = (props) => {
  
         
         <Route path="/flipRanges" element={<FlipRanges isOfficeInitialized={isOfficeInitialized}/>}  />
-        <Route path="/transposeRanges" element={<Transpose/>}/>
-        <Route path="/hideRanges"  element={<HideUnhideRanges/>} />
-        <Route path="/unhideRanges"  element={<UnhideRanges/>} />
+        <Route path="/transposeRanges" element={<Transpose isOfficeInitialized={isOfficeInitialized}/>}/>
+        <Route path="/hideRanges"  element={<HideUnhideRanges isOfficeInitialized={isOfficeInitialized}/>} />
+        <Route path="/unhideRanges"  element={<UnhideRanges isOfficeInitialized={isOfficeInitialized}/>} />
 
 
-        <Route path="/mergeRanges" element={<MergeRanges/>} />
-        <Route path="/unmergeRanges" element={<UnmergeRanges/>} />
+        <Route path="/mergeRanges" element={<MergeRanges isOfficeInitialized={isOfficeInitialized}/>} />
+        <Route path="/unmergeRanges" element={<UnmergeRanges isOfficeInitialized={isOfficeInitialized}/>} />
 
-        <Route path="/splitRanges" element={<SplitRanges/>} />
-        <Route path="/splitNames" element={<SplitNames/>}/>
-        <Route path="/combineRanges" element={<CombineRanges/>} />
+        <Route path="/splitRanges" element={<SplitRanges isOfficeInitialized={isOfficeInitialized}/>} />
+        <Route path="/splitNames" element={<SplitNames isOfficeInitialized={isOfficeInitialized}/>}/>
+        <Route path="/combineRanges" element={<CombineRanges isOfficeInitialized={isOfficeInitialized}/>} />
        </Routes>
     </Container>
     </React.Fragment>

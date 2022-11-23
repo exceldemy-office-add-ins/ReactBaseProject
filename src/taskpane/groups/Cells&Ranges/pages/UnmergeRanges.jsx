@@ -12,8 +12,8 @@ const radioInfo = [
   { id: "2", value: "unmergeAll", label: "Unmerge All" },
 ];
 
-export default function UnmergeRanges() {
-  const [ranges, setRanges] = React.useState("");
+export default function UnmergeRanges({isOfficeInitialized}) {
+  const [ranges, setRanges] = React.useState(" ");
   const [selection, setSelection] = React.useState("unmergeSelection");
   const selectionChangeHandler = (e) => {
     setSelection(e.target.value);
@@ -53,10 +53,14 @@ export default function UnmergeRanges() {
     // console.log(ranges);
     setRanges(event1.address);
   };
+
   useEffect(() => {
+    if(isOfficeInitialized){
     initialValue();
     copiedRangeEvent();
-  }, []);
+  }
+  }, [isOfficeInitialized]);
+
   return (
     <React.Fragment>
       <Title title=" Unmerge Ranges" />

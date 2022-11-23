@@ -30,7 +30,7 @@ const radioInfo4 = [
   { id: "2", value: "delete", label: "Delete content of combined cells" },
 ];
 
-export default function CombineRanges() {
+export default function CombineRanges({isOfficeInitialized}) {
   const [copiedRange, setCopiedRange] = React.useState(" ");
   const [selection, setSelection] = React.useState("rows");
   const [separator, setSeparatorType] = React.useState(" ");
@@ -38,7 +38,7 @@ export default function CombineRanges() {
   const [colNo, setColNo] = React.useState("");
   const [rowIndex, setRowIndex] = React.useState("");
   const [columnIndex, setColumnIndex] = React.useState("");
-  const [data, setData] = React.useState("");
+  const [data, setData] = React.useState(" ");
   const [sourceValues, setSourceValues] = React.useState("");
   const [inputIsShown, setInputIsShown] = React.useState(false);
   const [side, setSide] = React.useState("left");
@@ -51,7 +51,7 @@ export default function CombineRanges() {
         const range = context.workbook.getSelectedRanges();
         range.load("address");
         await context.sync();
-        setData(range.address);
+        // setData(range.address);
         setCopiedRange(range.address);
       });
     } catch (error) {
@@ -188,17 +188,23 @@ export default function CombineRanges() {
     }
   };
   
+
   useEffect(() => {
+    if(isOfficeInitialized){
     initialValue();
     dataRangeEvent();
-  }, []);
+  }
+  }, [isOfficeInitialized]);
+
   useEffect(() => {
     getSourceRangeData();
   }, [copiedRange]);
 
   useEffect(() => {
     setCopiedRange(data);
+
   }, [data]);
+
 
   return (
     <React.Fragment>

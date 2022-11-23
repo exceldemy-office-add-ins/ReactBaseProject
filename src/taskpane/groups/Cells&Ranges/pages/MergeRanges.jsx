@@ -16,8 +16,8 @@ const radioInfo = [
   { id: "2", value: "mergeAllExceptSelection", label: "All Except Selected Ranges" },
 ];
 
-export default function MergeRanges() {
-  const [ranges, setRanges] = React.useState("");
+export default function MergeRanges({isOfficeInitialized}) {
+  const [ranges, setRanges] = React.useState("A1");
   const [selection, setSelection] = React.useState("mergeSelection");
   const selectionChangeHandler = (e) => {
     setSelection(e.target.value);
@@ -57,10 +57,16 @@ export default function MergeRanges() {
     // console.log(ranges);
     setRanges(event1.address);
   };
+
   useEffect(() => {
+    if(isOfficeInitialized){
     initialValue();
     copiedRangeEvent();
-  }, []);
+  }
+  }, [isOfficeInitialized]);
+
+  console.log(ranges)
+
   return (
     <React.Fragment>
       <Title title="Merge Ranges" />

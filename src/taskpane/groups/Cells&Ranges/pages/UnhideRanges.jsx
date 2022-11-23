@@ -11,8 +11,8 @@ const radioInfo = [
   { id: "2", value: "unhideAll", label: "Unhide All" },
 ];
 
-export default function HideUnhideRanges() {
-  const [ranges, setRanges] = React.useState("");
+export default function HideUnhideRanges({isOfficeInitialized}) {
+  const [ranges, setRanges] = React.useState("A1");
   const [selection, setSelection] = React.useState("unhideSelectedRanges");
   const selectionChangeHandler = (e) => {
     setSelection(e.target.value);
@@ -51,10 +51,13 @@ export default function HideUnhideRanges() {
     setRanges(event1.address);
   };
 
+
   useEffect(() => {
+    if(isOfficeInitialized){
     initialValue();
     copiedRangeEvent();
-  }, []);
+  }
+  }, [isOfficeInitialized]);
 
   return (
     <React.Fragment>
