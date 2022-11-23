@@ -12,7 +12,7 @@ const radioInfo = [
   { id: "2", value: "vertically", label: "Vertically" },
 ];
 
-export default function FlipRanges() {
+export default function FlipRanges({isOfficeInitialized}) {
   const [ranges, setRanges] = React.useState("");
   const [selection, setSelection] = React.useState("horizontally");
   const selectionChangeHandler = (e) => {
@@ -53,10 +53,15 @@ export default function FlipRanges() {
     // console.log(ranges);
     setRanges(event1.address);
   };
+  console.log(isOfficeInitialized);
   useEffect(() => {
+    if(isOfficeInitialized){
     initialValue();
     copiedRangeEvent();
-  }, []);
+    console.log('useeffect is inside')
+  }
+    console.log('useeffect is on')
+  }, [isOfficeInitialized]);
   return (
     <React.Fragment>
       <Title title="Filp Ranges" />

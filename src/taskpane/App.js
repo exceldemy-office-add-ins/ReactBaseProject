@@ -14,9 +14,11 @@ import UnmergeRanges from "./groups/Cells&Ranges/pages/UnmergeRanges";
 import UnhideRanges from "./groups/Cells&Ranges/pages/UnhideRanges"
 import SplitRanges from "./groups/Cells&Ranges/components/SplitRanges/SplitRanges";
 import CombineRanges from "./groups/Cells&Ranges/components/CombineRanges/CombineRanges";
+import SplitNames from "./groups/Cells&Ranges/components/SplitRanges/SplitNames";
 
 const App = (props) => {
   const isOfficeInitialized = props.isOfficeInitialized;
+  console.log(isOfficeInitialized)
  
   return(
     <React.Fragment>
@@ -26,7 +28,7 @@ const App = (props) => {
         <Route path="/" element={<Home rangesData={rangesData} />}/>
  
         
-        <Route path="/flipRanges" element={<FlipRanges/>}/>
+        <Route path="/flipRanges" element={<FlipRanges isOfficeInitialized={isOfficeInitialized}/>}  />
         <Route path="/transposeRanges" element={<Transpose/>}/>
         <Route path="/hideRanges"  element={<HideUnhideRanges/>} />
         <Route path="/unhideRanges"  element={<UnhideRanges/>} />
@@ -36,6 +38,7 @@ const App = (props) => {
         <Route path="/unmergeRanges" element={<UnmergeRanges/>} />
 
         <Route path="/splitRanges" element={<SplitRanges/>} />
+        <Route path="/splitNames" element={<SplitNames/>}/>
         <Route path="/combineRanges" element={<CombineRanges/>} />
        </Routes>
     </Container>
