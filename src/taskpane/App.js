@@ -1,20 +1,23 @@
 /* eslint-disable no-undef */
 import * as React from "react";
-import Home from "./shared/home/Home";
 import { Route, Routes } from 'react-router-dom'
-import FlipRanges from "./groups/Cells&Ranges/pages/FlipRanges";
-import Header from "./shared/header/Header";
-import Transpose from "./groups/Cells&Ranges/components/TransposeRanges/Transpose";
-import HideUnhideRanges from "./groups/Cells&Ranges/pages/HideUnhideRanges";
-import Container from '@mui/material/Container';
 import { rangesData} from "./shared/data/rangesData";
+import Container from '@mui/material/Container';
+import Header from "./shared/header/Header";
 
-import MergeRanges from "./groups/Cells&Ranges/pages/MergeRanges";
-import UnmergeRanges from "./groups/Cells&Ranges/pages/UnmergeRanges";
-import UnhideRanges from "./groups/Cells&Ranges/pages/UnhideRanges"
-import SplitRanges from "./groups/Cells&Ranges/components/SplitRanges/SplitRanges";
-import CombineRanges from "./groups/Cells&Ranges/components/CombineRanges/CombineRanges";
-import SplitNames from "./groups/Cells&Ranges/components/SplitRanges/SplitNames";
+
+const FlipRanges = React.lazy(()=>import('./groups/Cells&Ranges/pages/FlipRanges') )
+import Home from "./shared/home/Home"
+
+const Transpose = React.lazy(()=>import("./groups/Cells&Ranges/components/TransposeRanges/Transpose"))
+const HideUnhideRanges = React.lazy(()=>import("./groups/Cells&Ranges/pages/HideUnhideRanges"))
+const MergeRanges = React.lazy(()=>import("./groups/Cells&Ranges/pages/MergeRanges"))
+const UnmergeRanges = React.lazy(()=>import("./groups/Cells&Ranges/pages/UnmergeRanges"))
+const UnhideRanges = React.lazy(()=>import("./groups/Cells&Ranges/pages/UnhideRanges"))
+const SplitRanges = React.lazy(()=>import("./groups/Cells&Ranges/components/SplitRanges/SplitRanges"))
+const CombineRanges = React.lazy(()=>import("./groups/Cells&Ranges/components/CombineRanges/CombineRanges"))
+const SplitNames = React.lazy(()=>import("./groups/Cells&Ranges/components/SplitRanges/SplitNames"))
+
 
 const App = (props) => {
   const isOfficeInitialized = props.isOfficeInitialized;
@@ -24,21 +27,21 @@ const App = (props) => {
     <Container sx={{padding:'10px'}}>
       <Header/>
       <Routes>
-        <Route path="/" element={<Home rangesData={rangesData} />}/>
+        <Route path="/" element={<Home />}/>
  
         
-        <Route path="/flipRanges" element={<FlipRanges isOfficeInitialized={isOfficeInitialized}/>}  />
-        <Route path="/transposeRanges" element={<Transpose isOfficeInitialized={isOfficeInitialized}/>}/>
-        <Route path="/hideRanges"  element={<HideUnhideRanges isOfficeInitialized={isOfficeInitialized}/>} />
-        <Route path="/unhideRanges"  element={<UnhideRanges isOfficeInitialized={isOfficeInitialized}/>} />
+        <Route path="/flipRanges" element={<React.Suspense fallback='loading'><FlipRanges isOfficeInitialized={isOfficeInitialized}/></React.Suspense>}  />
+        <Route path="/transposeRanges" element={<React.Suspense fallback="loading..."><Transpose isOfficeInitialized={isOfficeInitialized}/></React.Suspense> }/>
+        <Route path="/hideRanges"  element={<React.Suspense fallback="loading..."><HideUnhideRanges isOfficeInitialized={isOfficeInitialized}/></React.Suspense>} />
+        <Route path="/unhideRanges"  element={<React.Suspense fallback="loading..."><UnhideRanges isOfficeInitialized={isOfficeInitialized}/></React.Suspense>} />
 
 
-        <Route path="/mergeRanges" element={<MergeRanges isOfficeInitialized={isOfficeInitialized}/>} />
-        <Route path="/unmergeRanges" element={<UnmergeRanges isOfficeInitialized={isOfficeInitialized}/>} />
+        <Route path="/mergeRanges" element={<React.Suspense fallback="loading..."><MergeRanges isOfficeInitialized={isOfficeInitialized}/></React.Suspense>} />
+        <Route path="/unmergeRanges"element={<React.Suspense fallback="loading..."><UnmergeRanges isOfficeInitialized={isOfficeInitialized}/></React.Suspense>} />
 
-        <Route path="/splitRanges" element={<SplitRanges isOfficeInitialized={isOfficeInitialized}/>} />
-        <Route path="/splitNames" element={<SplitNames isOfficeInitialized={isOfficeInitialized}/>}/>
-        <Route path="/combineRanges" element={<CombineRanges isOfficeInitialized={isOfficeInitialized}/>} />
+        <Route path="/splitRanges"element={<React.Suspense fallback="loading..."><SplitRanges isOfficeInitialized={isOfficeInitialized}/></React.Suspense>} />
+        <Route path="/splitNames" element={<React.Suspense fallback="loading..."><SplitNames isOfficeInitialized={isOfficeInitialized}/></React.Suspense>} />
+        <Route path="/combineRanges"element={<React.Suspense fallback="loading..."><CombineRanges isOfficeInitialized={isOfficeInitialized}/></React.Suspense>} />
        </Routes>
     </Container>
     </React.Fragment>
