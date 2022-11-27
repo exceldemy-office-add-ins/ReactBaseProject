@@ -207,7 +207,7 @@ export default function SplitNames() {
           selectedRange={targetRange}
         />
 
-        <OkCancelButton onClick={splitRangesRows} selectedRange={copiedRange} />
+        <OkCancelButton onClick={splitRangesRows} selectedRange={copiedRange}  targetRange={targetRange} />
       </React.Fragment>
   
     </div>

@@ -17,7 +17,7 @@ export default function UnhideSelectedRanges(props) {
     };
   return (
     <React.Fragment>
-    <OkCancelButton onClick={unhideSelectedRanges} />
+    <OkCancelButton onClick={unhideSelectedRanges}  targetRange="nothing"/>
    </React.Fragment>
   )
 }

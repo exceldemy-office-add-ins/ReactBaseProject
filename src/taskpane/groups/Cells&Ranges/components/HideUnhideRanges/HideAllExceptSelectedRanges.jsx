@@ -27,7 +27,7 @@ export default function HideAllExceptSelectedRanges({selectedRange}) {
       };
   return (
     <React.Fragment>
-    <OkCancelButton  onClick={hideAllExceptSelectedRanges} selectedRange={selectedRange}/>
+    <OkCancelButton  onClick={hideAllExceptSelectedRanges} selectedRange={selectedRange} targetRange="nothing" />
   </React.Fragment>
   )
 }

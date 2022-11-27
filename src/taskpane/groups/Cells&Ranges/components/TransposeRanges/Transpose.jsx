@@ -1,5 +1,4 @@
-import { Alert } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import OkCancelButton from "../../../../shared/reusableComponents/okCancelButton";
 import RadioButton from "../../../../shared/reusableComponents/RadioButton";
 import RangeInputBox from "../../../../shared/reusableComponents/RangeInputBox";
@@ -46,9 +45,9 @@ export default function Transpose({isOfficeInitialized}) {
     setTargetRange(e.target.value);
   };
 
-  const selectionChangeHandler = (e) => {
+  const selectionChangeHandler = useCallback((e) => {
     setSelection(e.target.value);
-  };
+  },[]);
   var eventResult;
 
   const dataRangeEvent = async () => {
@@ -73,17 +72,20 @@ export default function Transpose({isOfficeInitialized}) {
   const getSourceRangeData = async () => {
     try {
       await Excel.run(async (context) => {
-        const range = context.workbook.worksheets.getActiveWorksheet().getRange(copiedRange);
-        range.load(["address", "rowCount", "columnCount", "values"]);
-        await context.sync();
-        setSourceValues(range.values);
-        setRowNo(range.rowCount);
-        setColNo(range.columnCount);
+        if(copiedRange.length >= 2){
+          const range = context.workbook.worksheets.getActiveWorksheet().getRange(copiedRange);
+          range.load(["address", "rowCount", "columnCount", "values"]);
+          await context.sync();
+          setSourceValues(range.values);
+          setRowNo(range.rowCount);
+          setColNo(range.columnCount);
+        }
       });
     } catch (error) {
       console.error(error);
     }
   };
+
 
   const getTargetRangeData = async () => {
     try {
@@ -146,7 +148,6 @@ export default function Transpose({isOfficeInitialized}) {
     setFocus("target");
   };
 
-
   return (
     <React.Fragment>
       <Title title="Transpose Dimensions" articleLink= "https://www.exceldemy.com/excel-transpose-rows-to-columns-based-on-criteria/" />
@@ -172,7 +173,7 @@ export default function Transpose({isOfficeInitialized}) {
         selectedRange= {targetRange}
       />
 
-      <OkCancelButton onClick={tableToList} />
+      <OkCancelButton onClick={tableToList} selectedRange={copiedRange} targetRange={targetRange} />
     </React.Fragment>
   );
 }

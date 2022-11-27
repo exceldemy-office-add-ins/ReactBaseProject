@@ -292,8 +292,8 @@ export default function SplitRanges({isOfficeInitialized}) {
           selectedRange={targetRange}
         />
 
-        {selection === "rows" && <OkCancelButton onClick={splitRangesRows} selectedRange={copiedRange} />}
-        {selection === "columns" && <OkCancelButton onClick={splitRangesColumns} selectedRange={copiedRange} />}
+        {selection === "rows" && <OkCancelButton onClick={splitRangesRows} selectedRange={copiedRange} targetRange={targetRange}/>}
+        {selection === "columns" && <OkCancelButton onClick={splitRangesColumns} selectedRange={copiedRange} targetRange={targetRange} />}
       </React.Fragment>
     </div>
   );

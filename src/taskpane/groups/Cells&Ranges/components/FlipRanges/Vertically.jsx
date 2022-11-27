@@ -31,7 +31,7 @@ const Vertically = (props) => {
   };
   return (
     <div>
-      <OkCancelButton onClick={verticalFlip} selectedRange={props.selectedRange}/>
+      <OkCancelButton onClick={verticalFlip} selectedRange={props.selectedRange} targetRange="nothing"/>
     </div>
   );
 };

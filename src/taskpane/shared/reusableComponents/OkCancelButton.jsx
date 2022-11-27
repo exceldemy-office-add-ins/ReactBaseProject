@@ -16,7 +16,7 @@ export default function OkCancelButton(props) {
           size="small"
           color="success"
           onClick={props.onClick}
-          disabled= {props.selectedRange === "" ? true : false}
+          disabled= {props.selectedRange === "" || props.targetRange.length<2 ? true : false}
         >
           OK
         </Button>

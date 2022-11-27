@@ -25,7 +25,7 @@ export default function UnmergeAllRanges({selectedRange}) {
   };
   return (
     <React.Fragment>
-      <OkCancelButton onClick={unmergeAll} />
+      <OkCancelButton onClick={unmergeAll}  targetRange="nothing" />
     </React.Fragment>
   );
 }

@@ -18,7 +18,7 @@ export default function HideSelectedRanges({selectedRange}) {
 
   return (
     <React.Fragment>
-     <OkCancelButton onClick={hideSelectedRanges} selectedRange={selectedRange} />
+     <OkCancelButton onClick={hideSelectedRanges} selectedRange={selectedRange}  targetRange="nothing"/>
     </React.Fragment>
   );
 }

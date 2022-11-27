@@ -33,7 +33,7 @@ const Horizontally = (props) => {
   };
   return (
     <div>      
-    <OkCancelButton onClick={horizontalFlip} selectedRange={props.selectedRange} />
+    <OkCancelButton onClick={horizontalFlip} selectedRange={props.selectedRange} targetRange="nothing" />
     </div>
   );
 };

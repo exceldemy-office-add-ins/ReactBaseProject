@@ -17,7 +17,7 @@ export default function UnhideAll({selectedRange}) {
   };
   return (
     <React.Fragment>
-     <OkCancelButton onClick={unhideAll} selectedRange={selectedRange}  />
+     <OkCancelButton onClick={unhideAll} selectedRange={selectedRange} targetRange="nothing"  />
     </React.Fragment>
   );
 }

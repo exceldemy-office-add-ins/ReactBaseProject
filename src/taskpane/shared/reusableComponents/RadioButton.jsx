@@ -4,7 +4,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import { Paper } from "@mui/material";
-export default function RadioButton(props) {
+const RadioButton=(props)=> {
   return (
     <React.Fragment>
       <Paper elevation={1} sx={{ marginBottom: "10px", marginTop: "10px", padding:'5px'}}>
@@ -39,3 +39,5 @@ export default function RadioButton(props) {
     </React.Fragment>
   );
 }
+
+export default React.memo(RadioButton);

@@ -21,7 +21,7 @@ export default function HideDiscontinuousRanges({ selectedRange }) {
   };
   return (
     <React.Fragment>
-     <OkCancelButton onClick={hideDiscontinuousRanges} selectedRange={selectedRange}/>
+     <OkCancelButton onClick={hideDiscontinuousRanges} selectedRange={selectedRange} targetRange="nothing"/>
     </React.Fragment>
   );
 }
