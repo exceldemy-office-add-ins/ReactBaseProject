@@ -10,6 +10,7 @@ const FlipRanges = React.lazy(()=>import('./groups/Cells&Ranges/pages/FlipRanges
 import Home from "./shared/home/Home"
 
 const Transpose = React.lazy(()=>import("./groups/Cells&Ranges/components/TransposeRanges/Transpose"))
+const Swap = React.lazy(()=>import('./groups/Cells&Ranges/components/SwapRanges/SwapRanges'))
 const HideUnhideRanges = React.lazy(()=>import("./groups/Cells&Ranges/pages/HideUnhideRanges"))
 const MergeRanges = React.lazy(()=>import("./groups/Cells&Ranges/pages/MergeRanges"))
 const UnmergeRanges = React.lazy(()=>import("./groups/Cells&Ranges/pages/UnmergeRanges"))
@@ -32,6 +33,7 @@ const App = (props) => {
         
         <Route path="/flipRanges" element={<React.Suspense fallback='loading'><FlipRanges isOfficeInitialized={isOfficeInitialized}/></React.Suspense>}  />
         <Route path="/transposeRanges" element={<React.Suspense fallback="loading..."><Transpose isOfficeInitialized={isOfficeInitialized}/></React.Suspense> }/>
+        <Route path="/swapRanges" element={<React.Suspense fallback="loading..."><Swap isOfficeInitialized={isOfficeInitialized}/></React.Suspense> }/>
         <Route path="/hideRanges"  element={<React.Suspense fallback="loading..."><HideUnhideRanges isOfficeInitialized={isOfficeInitialized}/></React.Suspense>} />
         <Route path="/unhideRanges"  element={<React.Suspense fallback="loading..."><UnhideRanges isOfficeInitialized={isOfficeInitialized}/></React.Suspense>} />
 

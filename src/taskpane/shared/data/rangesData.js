@@ -14,12 +14,18 @@ export const rangesData = [
   },
   {
     id: "3",
+    title: "Swap Ranges",
+    description: "Swap ranges, columns, and rows of the same size.",
+    link: '/swapRanges'
+  },
+  {
+    id: "4",
     title: "Hide Ranges",
     description: "Hide a single column or raw, multiple adjacent and non-adjacent columns and rows ",
     link: '/hideRanges'
   },
   {
-    id: "4",
+    id: "5",
     title: "Unhide Ranges",
     description: "Hide a single column or raw, multiple adjacent and non-adjacent columns and rows ",
     link: '/unhideRanges'

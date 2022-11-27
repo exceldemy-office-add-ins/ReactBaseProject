@@ -101,7 +101,7 @@
                       </Icon>
                       <Action xsi:type="ShowTaskpane">
                         <TaskpaneId>ButtonId1</TaskpaneId>
-                        <SourceLocation resid="HideRanges.Url"/>
+                        <SourceLocation resid="SwapRanges.Url"/>
                       </Action>
                     </Item>
 
@@ -110,6 +110,23 @@
                       <Supertip>
                         <Title resid="Menu1.Item4.Label_2" />
                         <Description resid="Menu1.Item4.Tooltip" />
+                      </Supertip>
+                      <Icon>
+                        <bt:Image size="16" resid="Icon.16x16"/>
+                        <bt:Image size="32" resid="Icon.32x32"/>
+                        <bt:Image size="80" resid="Icon.80x80"/>
+                      </Icon>
+                      <Action xsi:type="ShowTaskpane">
+                        <TaskpaneId>ButtonId1</TaskpaneId>
+                        <SourceLocation resid="HideRanges.Url"/>
+                      </Action>
+                    </Item>
+
+                     <Item id="Menu1.Item5">
+                      <Label resid="Menu1.Item5.Label"/>
+                      <Supertip>
+                        <Title resid="Menu1.Item5.Label_2" />
+                        <Description resid="Menu1.Item5.Tooltip" />
                       </Supertip>
                       <Icon>
                         <bt:Image size="16" resid="Icon.16x16"/>
@@ -252,6 +269,7 @@
         <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3000/taskpane.html"/>
         <bt:Url id="FlipRanges.Url" DefaultValue="https://localhost:3000/taskpane.html#/flipRanges"/>
         <bt:Url id="TransposeRanges.Url" DefaultValue="https://localhost:3000/taskpane.html#/transposeRanges"/>
+        <bt:Url id="SwapRanges.Url" DefaultValue="https://localhost:3000/taskpane.html#/swapRanges"/>
         <bt:Url id="HideRanges.Url" DefaultValue="https://localhost:3000/taskpane.html#/hideRanges"/>
         <bt:Url id="UnhideRanges.Url" DefaultValue="https://localhost:3000/taskpane.html#/unhideRanges"/>
         <bt:Url id="MergeRanges.Url" DefaultValue="https://localhost:3000/taskpane.html#/mergeRanges"/>
@@ -271,10 +289,12 @@
         <bt:String id="Menu1.Item1.Label_2" DefaultValue="Horizontally or Vertically" />
         <bt:String id="Menu1.Item2.Label" DefaultValue="Transpose Ranges" />
         <bt:String id="Menu1.Item2.Label_2" DefaultValue="Selected or Except Selected" />
-        <bt:String id="Menu1.Item3.Label" DefaultValue="Hide Ranges" />
-        <bt:String id="Menu1.Item3.Label_2" DefaultValue="Selected or Except Selected" />
-        <bt:String id="Menu1.Item4.Label" DefaultValue="Unhide Ranges" />
-        <bt:String id="Menu1.Item4.Label_2" DefaultValue="Selected or All" />
+        <bt:String id="Menu1.Item3.Label" DefaultValue="Swap Ranges" />
+        <bt:String id="Menu1.Item3.Label_2" DefaultValue="Rows or Columns" />
+        <bt:String id="Menu1.Item4.Label" DefaultValue="Hide Ranges" />
+        <bt:String id="Menu1.Item4.Label_2" DefaultValue="Selected or Except Selected" />
+        <bt:String id="Menu1.Item5.Label" DefaultValue="Unhide Ranges" />
+        <bt:String id="Menu1.Item5.Label_2" DefaultValue="Selected or All" />
 
 
         <bt:String id="Menu2.Dropdown.Label" DefaultValue="Merge &#38; Unmerge " />
@@ -297,8 +317,9 @@
         <bt:String id="Menu1.Dropdown.Tooltip" DefaultValue="Click to Show Range options." />
         <bt:String id="Menu1.Item1.Tooltip"   DefaultValue="Flip or reverse the order of the selected ranges."/>
         <bt:String id="Menu1.Item2.Tooltip" DefaultValue="Traspose ranges" />
-        <bt:String id="Menu1.Item3.Tooltip" DefaultValue="Hide a single column or raw, multiple adjacent and non-adjacent columns and rows." />
-        <bt:String id="Menu1.Item4.Tooltip" DefaultValue="Unhide hidden ranges from selection or all." />
+        <bt:String id="Menu1.Item3.Tooltip" DefaultValue="Swap ranges, columns, and rows of the same size." />
+        <bt:String id="Menu1.Item4.Tooltip" DefaultValue="Hide a single column or raw, multiple adjacent and non-adjacent columns and rows." />
+        <bt:String id="Menu1.Item5.Tooltip" DefaultValue="Unhide hidden ranges from selection or all." />
 
 
         <bt:String id="Menu2.Dropdown.Tooltip" DefaultValue="Click to Show Merge &#38; Unmerge options." />
