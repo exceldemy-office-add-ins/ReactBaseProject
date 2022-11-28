@@ -12,11 +12,73 @@
 
     <!-- Office JavaScript API -->
     <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
+    <style>
+        .splash{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: white;
+    z-index: 200;
+    color: black;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.splash.display-none{
+    position: fixed;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: white;
+    z-index: -10;
+    color: black;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .5s;
+}
+
+@keyframes fadeIn{
+    to{
+        opacity: 1;
+    }
+}
+
+.fade-in{
+    opacity: 0;
+    animation: fadeIn 1s ease-in forwards;
+}
+
+    </style>
 
 </head>
 
 <body>
-    <div id="container"></div>
+    <div class="splash">
+        <div style="display: block;">
+          <img class="fade-in" src="https://softeko.co/wp-content/uploads/2022/06/softeko-logo.png" alt="logo" >
+          <h1 class="fade-in">Exceldemy Add-in</h1>
+        </div>
+      </div>
+    <div id="container">
+  
+    </div>
+    <script>
+        const splash = document.querySelector(".splash");
+document.addEventListener("DOMContentLoaded", (e)=>{
+  setTimeout(()=>{
+    splash.classList.add("display-none");
+  },1000);
+})
+    </script>
 </body>
+
 
 </html>

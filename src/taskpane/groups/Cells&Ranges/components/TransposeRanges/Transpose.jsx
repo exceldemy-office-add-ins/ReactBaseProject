@@ -5,8 +5,8 @@ import RangeInputBox from "../../../../shared/reusableComponents/RangeInputBox";
 import Title from "../../../../shared/reusableComponents/Title";
 
 const radioInfo = [
-  { id: "1", value: "tableToList", label: "Table To List" },
-  { id: "2", value: "listToTable", label: "List to Table" },
+  { id: "1", value: "tableToList", label: "Cross Table To List" },
+  { id: "2", value: "listToTable", label: "List to Cross Table" },
 ];
 
 export default function Transpose({isOfficeInitialized}) {

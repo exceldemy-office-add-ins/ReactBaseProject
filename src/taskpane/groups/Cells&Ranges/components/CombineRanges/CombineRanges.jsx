@@ -312,7 +312,7 @@ export default function CombineRanges({isOfficeInitialized}) {
       <RadioButton title="Options" defaultValue ="keep" formData={radioInfo4} onChange= {optionsChangeHandler} />
 
       {selection === "rows" && <OkCancelButton onClick={combineRangesRows} selectedRange={copiedRange} targetRange="nothing"/>}
-      {selection === "columns" && <OkCancelButton onClick={combineRangesColumns} selectedRange={copiedRange} />}
+      {selection === "columns" && <OkCancelButton onClick={combineRangesColumns} selectedRange={copiedRange} targetRange="nothing" />}
 
     </React.Fragment>
   );
