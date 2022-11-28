@@ -1,16 +1,15 @@
 /* eslint-disable no-undef */
 import * as React from "react";
 import { Route, Routes } from 'react-router-dom'
-import { rangesData} from "./shared/data/rangesData";
 import Container from '@mui/material/Container';
 import Header from "./shared/header/Header";
 
 
 const FlipRanges = React.lazy(()=>import('./groups/Cells&Ranges/pages/FlipRanges') )
 import Home from "./shared/home/Home"
-import { Loading } from "./shared/navigation/Loading";
 
-const Transpose = React.lazy(()=>import("./groups/Cells&Ranges/components/TransposeRanges/Transpose"))
+
+const Transpose = React.lazy(()=>import("./groups/Cells&Ranges/pages/TransposeRanges"))
 const Swap = React.lazy(()=>import('./groups/Cells&Ranges/components/SwapRanges/SwapRanges'))
 const HideUnhideRanges = React.lazy(()=>import("./groups/Cells&Ranges/pages/HideUnhideRanges"))
 const MergeRanges = React.lazy(()=>import("./groups/Cells&Ranges/pages/MergeRanges"))
