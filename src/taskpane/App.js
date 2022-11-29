@@ -25,7 +25,7 @@ const App = (props) => {
  
   return(
     <React.Fragment>
-    <Container sx={{padding:'10px'}}>
+    <Container sx={{padding:'10px', background:'white',minHeight: '100vh', height:'100%' }} >
       <Header/>
       <Routes>
         <Route path="/" element={<Home />}/>
