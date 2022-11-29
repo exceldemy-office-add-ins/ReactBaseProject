@@ -93,12 +93,14 @@ export default function SplitRanges({isOfficeInitialized}) {
   const getSourceRangeData = async () => {
     try {
       await Excel.run(async (context) => {
+        if(copiedRange.length >= 2){
         const range = context.workbook.worksheets.getActiveWorksheet().getRange(copiedRange);
         range.load(["rowCount", "columnCount", "values"]);
         await context.sync();
         setSourceValues(range.values);
         setRowNo(range.rowCount);
         setColNo(range.columnCount);
+        }
       });
     } catch (error) {
       console.error(error);
@@ -108,11 +110,13 @@ export default function SplitRanges({isOfficeInitialized}) {
   const getTargetRangeData = async () => {
     try {
       await Excel.run(async (context) => {
+        if(targetRange.length >= 2){
         const range = context.workbook.worksheets.getActiveWorksheet().getRange(targetRange);
         range.load(["rowIndex", "columnIndex"]);
         await context.sync();
         setRowIndex(range.rowIndex);
         setColumnIndex(range.columnIndex);
+        }
       });
     } catch (error) {
       console.log(error);

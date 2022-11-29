@@ -117,6 +117,7 @@ export default function CombineRanges({isOfficeInitialized}) {
   const getSourceRangeData = async () => {
     try {
       await Excel.run(async (context) => {
+        if(copiedRange.length >= 2){
         const range = context.workbook.worksheets.getActiveWorksheet().getRange(copiedRange);
         range.load(["rowCount", "columnCount", "values", "rowIndex", "columnIndex"]);
         await context.sync();
@@ -125,6 +126,7 @@ export default function CombineRanges({isOfficeInitialized}) {
         setColNo(range.columnCount);
         setRowIndex(range.rowIndex);
         setColumnIndex(range.columnIndex);
+        }
       });
     } catch (error) {
       console.error(error);

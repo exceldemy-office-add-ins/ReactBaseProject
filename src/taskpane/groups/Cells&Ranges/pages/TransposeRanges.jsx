@@ -11,7 +11,7 @@ const radioInfo = [
 
 export default function TransposeRanges({isOfficeInitialized}) {
   const [copiedRange, setCopiedRange] = React.useState(" ");
-  const [targetRange, setTargetRange] = React.useState(" B1");
+  const [targetRange, setTargetRange] = React.useState(" ");
   const [selection, setSelection] = React.useState("tableToList");
   const [rowNo, setRowNo] = React.useState("");
   const [colNo, setColNo] = React.useState("");
@@ -90,11 +90,13 @@ export default function TransposeRanges({isOfficeInitialized}) {
   const getTargetRangeData = async () => {
     try {
       await Excel.run(async (context) => {
+        if(targetRange.length >= 2){
         const range = context.workbook.worksheets.getActiveWorksheet().getRange(targetRange);
         range.load(["address", "rowIndex", "columnIndex"]);
         await context.sync();
         setRowIndex(range.rowIndex);
         setColumnIndex(range.columnIndex);
+        }
       });
     } catch (error) {
       console.log(error);

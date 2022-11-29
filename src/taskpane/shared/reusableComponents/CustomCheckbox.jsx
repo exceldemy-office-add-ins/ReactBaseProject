@@ -7,6 +7,7 @@ export default function CustomCheckbox(props) {
         <FormGroup>
             {props.fromData.map(data=>(
           <FormControlLabel
+              key={data.id}
             sx={{
               span: { padding: "3px" },
               "& .MuiTypography-root": { fontSize: ".85rem", fontWeight: '500' },

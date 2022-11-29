@@ -88,6 +88,7 @@ const SwapRanges = ({ isOfficeInitialized }) => {
   const getTargetRangeData = async () => {
     try {
       await Excel.run(async (context) => {
+        if (targetRange.length >= 2) {
         const range = context.workbook.worksheets.getActiveWorksheet().getRange(targetRange);
         range.load(["address", "rowCount", "columnCount", "values", "rowIndex", "columnIndex"]);
         await context.sync();
@@ -96,6 +97,7 @@ const SwapRanges = ({ isOfficeInitialized }) => {
         setColNo_2(range.columnCount);
         setRowIndex_2(range.rowIndex);
         setColumnIndex_2(range.columnIndex);
+        }
       });
     } catch (error) {
       console.log(error);
