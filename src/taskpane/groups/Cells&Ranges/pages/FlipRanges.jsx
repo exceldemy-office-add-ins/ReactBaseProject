@@ -57,6 +57,9 @@ export default function FlipRanges({isOfficeInitialized}) {
     if(isOfficeInitialized){
     initialValue();
     copiedRangeEvent();
+    return () => {
+      setRanges(""); // This worked for me
+    };
   }
   }, [isOfficeInitialized]);
   return (

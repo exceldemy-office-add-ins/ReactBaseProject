@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from "react";
-
 import RangeInputBox from "../../../shared/reusableComponents/RangeInputBox";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
 import MergeSelectedRanges from "../components/MergeUnmerge/MergeSelectedRanges";
-import MergeAllExceptSelectedRanges from "../components/MergeUnmerge/MergeAllExceptSelectedRanges.";
-import { Alert, Typography } from "@mui/material";
+import { Alert } from "@mui/material";
 import Title from "../../../shared/reusableComponents/Title";
-import RadioButton from "../../../shared/reusableComponents/RadioButton";
+
 
 const radioInfo = [
   { id: "1", value: "mergeSelection", label: "Only the Selected Range" },
@@ -17,7 +11,7 @@ const radioInfo = [
 ];
 
 export default function MergeRanges({isOfficeInitialized}) {
-  const [ranges, setRanges] = React.useState("A1");
+  const [ranges, setRanges] = React.useState(" ");
   const [selection, setSelection] = React.useState("mergeSelection");
   const selectionChangeHandler = (e) => {
     setSelection(e.target.value);
@@ -62,10 +56,11 @@ export default function MergeRanges({isOfficeInitialized}) {
     if(isOfficeInitialized){
     initialValue();
     copiedRangeEvent();
+    return () => {
+      setRanges(""); // This worked for me
+    };
   }
   }, [isOfficeInitialized]);
-
-  console.log(ranges)
 
   return (
     <React.Fragment>

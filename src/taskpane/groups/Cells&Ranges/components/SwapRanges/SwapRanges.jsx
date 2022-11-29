@@ -141,6 +141,9 @@ const SwapRanges = ({ isOfficeInitialized }) => {
       initialValue();
       dataRangeEvent();
     }
+    return () => {
+      setCopiedRange(""); // This worked for me
+    };
   }, [isOfficeInitialized]);
   useEffect(() => {
     getSourceRangeData();

@@ -12,7 +12,7 @@ const formData = [
 ]
 
 
-export default function SplitNames() {
+export default function SplitNames({isOfficeInitialized}) {
   const [copiedRange, setCopiedRange] = React.useState(" ");
   const [targetRange, setTargetRange] = React.useState(" ");
   const [names, setNames] = React.useState([]);
@@ -152,7 +152,10 @@ export default function SplitNames() {
   useEffect(() => {
     initialValue();
     dataRangeEvent();
-  }, []);
+    return () => {
+      setCopiedRange(""); // This worked for me
+    };
+  }, [isOfficeInitialized]);
   useEffect(() => {
     getSourceRangeData();
   }, [copiedRange]);

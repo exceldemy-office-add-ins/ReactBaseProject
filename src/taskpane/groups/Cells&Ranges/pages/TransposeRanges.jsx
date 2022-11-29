@@ -179,6 +179,9 @@ export default function TransposeRanges({isOfficeInitialized}) {
     initialValue();
     dataRangeEvent();
   }
+  return () => {
+    setCopiedRange(""); // This worked for me
+  };
   }, [isOfficeInitialized]);
   useEffect(() => {
     getSourceRangeData();

@@ -195,6 +195,9 @@ export default function CombineRanges({isOfficeInitialized}) {
     if(isOfficeInitialized){
     initialValue();
     dataRangeEvent();
+    return () => {
+      setCopiedRange(""); // This worked for me
+    };
   }
   }, [isOfficeInitialized]);
 

@@ -59,6 +59,9 @@ export default function UnmergeRanges({isOfficeInitialized}) {
     initialValue();
     copiedRangeEvent();
   }
+  return () => {
+    setRanges(""); // This worked for me
+  };
   }, [isOfficeInitialized]);
 
   return (
